@@ -211,7 +211,7 @@ class _LoginScreenState extends State<LoginScreen> {
               // TODO: Add social login
             },
             AssetImage(
-              'assets/icons/google.png',
+              'assets/icons/google.jpg',
             ),
           ),
         ],
