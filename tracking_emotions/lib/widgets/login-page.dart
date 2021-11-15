@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:tracking_emotions/utils/constants.dart';
+import 'package:tracking_emotions/utils/services/authentication-services/authentication-controller.dart';
+import 'package:tracking_emotions/widgets/user-information.dart';
 
 class LoginScreen extends StatefulWidget {
   @override
@@ -8,10 +10,11 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-  TextEditingController usernameController = new TextEditingController();
-  TextEditingController passwordController = new TextEditingController();
-
-  final loginFormKey = GlobalKey<FormState>();
+  TextEditingController _usernameController = new TextEditingController();
+  TextEditingController _passwordController = new TextEditingController();
+  AuthenticationController _authenticationController =
+      new AuthenticationController();
+  final _loginFormKey = GlobalKey<FormState>();
 
   Widget buildUsernameTF() {
     return Column(
@@ -25,7 +28,7 @@ class _LoginScreenState extends State<LoginScreen> {
             height: 50.0,
           ),
           TextFormField(
-            controller: usernameController,
+            controller: _usernameController,
             autovalidateMode: AutovalidateMode.onUserInteraction,
             keyboardType: TextInputType.name,
             validator: (value) {
@@ -62,7 +65,7 @@ class _LoginScreenState extends State<LoginScreen> {
               decoration: cBoxDecorationStyle,
               height: 50.0),
           TextFormField(
-            controller: passwordController,
+            controller: _passwordController,
             autovalidateMode: AutovalidateMode.onUserInteraction,
             obscureText: true,
             validator: (value) {
@@ -103,7 +106,7 @@ class _LoginScreenState extends State<LoginScreen> {
         ),
         onPressed: () => {
           //TODO: add login functionality
-          loginFormKey.currentState.validate()
+          _loginFormKey.currentState.validate()
         },
         child: Text(
           'LOGIN',
@@ -199,17 +202,13 @@ class _LoginScreenState extends State<LoginScreen> {
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: <Widget>[
           buildSocialBtn(
-            () => {
-              // TODO: Add social login
-            },
+            () async => {await _connectWithFacebook()},
             AssetImage(
               'assets/icons/facebook.jpg',
             ),
           ),
           buildSocialBtn(
-            () => {
-              // TODO: Add social login
-            },
+            () async => {await _connectWithGoogle()},
             AssetImage(
               'assets/icons/google.jpg',
             ),
@@ -217,6 +216,28 @@ class _LoginScreenState extends State<LoginScreen> {
         ],
       ),
     );
+  }
+
+  Future<void> _connectWithGoogle() async {
+    await _authenticationController.initializeGoogleAuthentication();
+    final result = await _authenticationController.login();
+    if (result) {
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => UserInformationScreen()),
+      );
+    }
+  }
+
+  Future<void> _connectWithFacebook() async {
+    await _authenticationController.initializeFacebookAuthentication();
+    final result = await _authenticationController.login();
+    if (result) {
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => UserInformationScreen()),
+      );
+    }
   }
 
   @override
@@ -241,7 +262,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     vertical: 120.0,
                   ),
                   child: Form(
-                    key: loginFormKey,
+                    key: _loginFormKey,
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
