@@ -25,7 +25,7 @@ class GoogleAuthenticationService implements AuthenticationServiceInterface {
   }
 
   @override
-  Future logOut() async {
+  Future<dynamic> logOut() async {
     await GoogleSignIn().disconnect();
     this._googleAccount = null;
   }

@@ -25,7 +25,7 @@ class FacebookAuthenticationService implements AuthenticationServiceInterface {
   }
 
   @override
-  Future logOut() async {
+  Future<dynamic> logOut() async {
     await FacebookAuth.instance.logOut();
     this._userData = null;
   }

@@ -1,7 +1,7 @@
 abstract class AuthenticationServiceInterface {
   Future<bool> isSignedIn();
   Future<bool> login();
-  Future logOut();
+  Future<dynamic> logOut();
   String getName();
   String getEmail();
   String getPhotoUrl();

@@ -23,19 +23,19 @@ class AuthenticationController {
     return false;
   }
 
-  void logOut() async {
-    authenticationService.logOut();
+  Future<dynamic> logOut() async {
+    await authenticationService.logOut();
   }
 
   Future<bool> login() async {
-    return authenticationService.login();
+    return await authenticationService.login();
   }
 
-  void initializeGoogleAuthentication() async {
+  void initializeGoogleAuthentication() {
     this.authenticationService = new GoogleAuthenticationService();
   }
 
-  void initializeFacebookAuthentication() async {
+  void initializeFacebookAuthentication() {
     this.authenticationService = new FacebookAuthenticationService();
   }
 
@@ -55,7 +55,7 @@ class AuthenticationController {
     return this.authenticationService.getAccountId();
   }
 
-  void initializeAuthenticationMetod() async {
+  Future<dynamic> initializeAuthenticationMetod() async {
     final GoogleAuthenticationService googleAuthenticationService =
         new GoogleAuthenticationService();
     final FacebookAuthenticationService facebookAuthenticationService =

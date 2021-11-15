@@ -218,8 +218,8 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 
-  void _connectWithGoogle() async {
-    await _authenticationController.initializeGoogleAuthentication();
+  Future<dynamic> _connectWithGoogle() async {
+    _authenticationController.initializeGoogleAuthentication();
     final result = await _authenticationController.login();
     if (result) {
       Navigator.push(
@@ -229,8 +229,8 @@ class _LoginScreenState extends State<LoginScreen> {
     }
   }
 
-  void _connectWithFacebook() async {
-    await _authenticationController.initializeFacebookAuthentication();
+  Future<dynamic> _connectWithFacebook() async {
+    _authenticationController.initializeFacebookAuthentication();
     final result = await _authenticationController.login();
     if (result) {
       Navigator.push(
