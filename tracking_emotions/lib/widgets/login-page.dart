@@ -218,7 +218,7 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 
-  Future<void> _connectWithGoogle() async {
+  void _connectWithGoogle() async {
     await _authenticationController.initializeGoogleAuthentication();
     final result = await _authenticationController.login();
     if (result) {
@@ -229,7 +229,7 @@ class _LoginScreenState extends State<LoginScreen> {
     }
   }
 
-  Future<void> _connectWithFacebook() async {
+  void _connectWithFacebook() async {
     await _authenticationController.initializeFacebookAuthentication();
     final result = await _authenticationController.login();
     if (result) {

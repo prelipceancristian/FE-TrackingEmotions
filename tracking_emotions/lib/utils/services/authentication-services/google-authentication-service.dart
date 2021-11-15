@@ -11,7 +11,7 @@ class GoogleAuthenticationService implements AuthenticationServiceInterface {
     return _googleAuthenticationService;
   }
 
-  GoogleAuthenticationService.internal() {}
+  GoogleAuthenticationService.internal();
 
   @override
   Future<bool> isSignedIn() async {

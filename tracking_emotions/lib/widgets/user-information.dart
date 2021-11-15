@@ -7,8 +7,7 @@ import 'package:tracking_emotions/utils/services/authentication-services/authent
 import 'package:tracking_emotions/widgets/login-page.dart';
 
 class UserInformationScreen extends StatefulWidget {
-  AuthenticationController authenticationController;
-  UserInformationScreen() {}
+  UserInformationScreen();
   @override
   _UserInformationScreenState createState() => _UserInformationScreenState();
 }
@@ -19,7 +18,8 @@ class _UserInformationScreenState extends State<UserInformationScreen> {
   final loginFormKey = GlobalKey<FormState>();
   String userData = "nimic";
 
-  AuthenticationController authenticationController;
+  final AuthenticationController authenticationController =
+      new AuthenticationController();
 
   String prettyPrint(Map json) {
     JsonEncoder encoder = new JsonEncoder.withIndent('  ');
@@ -27,9 +27,7 @@ class _UserInformationScreenState extends State<UserInformationScreen> {
     return pretty;
   }
 
-  _UserInformationScreenState() {
-    this.authenticationController = new AuthenticationController();
-  }
+  _UserInformationScreenState();
 
   void getUserData() {
     this.userData = authenticationController.getName();

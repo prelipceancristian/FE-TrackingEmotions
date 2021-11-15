@@ -10,7 +10,7 @@ class FacebookAuthenticationService implements AuthenticationServiceInterface {
     return _facebookAuthenticationService;
   }
 
-  FacebookAuthenticationService.internal() {}
+  FacebookAuthenticationService.internal();
 
   @override
   Future<bool> isSignedIn() async {

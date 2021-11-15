@@ -12,7 +12,7 @@ class AuthenticationController {
     return authenticationController;
   }
 
-  AuthenticationController.internal() {}
+  AuthenticationController.internal();
 
   Future<bool> isSignedIn() async {
     await initializeAuthenticationMetod();
@@ -23,7 +23,7 @@ class AuthenticationController {
     return false;
   }
 
-  Future logOut() async {
+  void logOut() async {
     authenticationService.logOut();
   }
 
