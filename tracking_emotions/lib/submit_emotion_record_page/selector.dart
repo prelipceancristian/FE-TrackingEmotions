@@ -1,16 +1,11 @@
 import 'package:flutter/material.dart';
 
 class Selector extends StatefulWidget {
-  List<String> values;
-  String prefixIconType;
-  Function(String) callBack;
+  final List<String> values;
+  final String prefixIconType;
+  final Function(String) callBack;
 
-  Selector(
-      List<String> values, String prefixIconType, Function(String) callBack) {
-    this.values = values;
-    this.prefixIconType = prefixIconType;
-    this.callBack = callBack;
-  }
+  Selector(this.values, this.prefixIconType, this.callBack);
 
   @override
   _SelectorState createState() => _SelectorState(values, prefixIconType);

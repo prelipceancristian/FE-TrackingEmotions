@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class SubmitEmotionRecordPageText extends StatelessWidget {
-  String text;
+  final String text;
 
   SubmitEmotionRecordPageText(this.text);
 
