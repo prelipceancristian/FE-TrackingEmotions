@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:tracking_emotions/MyStatefulWidget.dart';
 import 'package:tracking_emotions/utils/services/authentication-services/authentication-controller.dart';
-import 'package:tracking_emotions/widgets/user-information.dart';
 
 import 'widgets/login-page.dart';
 
-void main() {
-  runApp(MyApp());
-}
+void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.
@@ -70,7 +68,7 @@ class _MyHomePageState extends State<MyHomePage> {
         future: authenticationController.isSignedIn(),
         builder: (BuildContext context, AsyncSnapshot<bool> isSignedIn) {
           if (isSignedIn.hasData && isSignedIn.data == true) {
-            return UserInformationScreen();
+            return MyStatefulWidget();
           }
           return LoginScreen();
         });

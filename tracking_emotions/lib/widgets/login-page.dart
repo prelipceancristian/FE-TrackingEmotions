@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:tracking_emotions/MyStatefulWidget.dart';
 import 'package:tracking_emotions/utils/constants.dart';
 import 'package:tracking_emotions/utils/services/authentication-services/authentication-controller.dart';
-import 'package:tracking_emotions/widgets/user-information.dart';
 
 class LoginScreen extends StatefulWidget {
   @override
@@ -222,9 +222,9 @@ class _LoginScreenState extends State<LoginScreen> {
     _authenticationController.initializeGoogleAuthentication();
     final result = await _authenticationController.login();
     if (result) {
-      Navigator.push(
+      Navigator.pushReplacement(
         context,
-        MaterialPageRoute(builder: (context) => UserInformationScreen()),
+        MaterialPageRoute(builder: (context) => MyStatefulWidget()),
       );
     }
   }
@@ -233,9 +233,9 @@ class _LoginScreenState extends State<LoginScreen> {
     _authenticationController.initializeFacebookAuthentication();
     final result = await _authenticationController.login();
     if (result) {
-      Navigator.push(
+      Navigator.pushReplacement(
         context,
-        MaterialPageRoute(builder: (context) => UserInformationScreen()),
+        MaterialPageRoute(builder: (context) => MyStatefulWidget()),
       );
     }
   }
