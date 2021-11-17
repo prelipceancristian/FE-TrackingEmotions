@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-
-import 'HomeScreen.dart';
-import 'MyStatefulWidget.dart';
+import 'package:tracking_emotions/submit_emotion_record_page/submitEmotionRecordPage.dart';
 
 void main() => runApp(MyApp());
 
