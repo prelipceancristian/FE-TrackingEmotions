@@ -6,10 +6,10 @@ import 'package:flutter/rendering.dart';
 import 'package:chat_bubbles/chat_bubbles.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(ChooseEmotionType());
 }
 
-class MyApp extends StatelessWidget {
+class ChooseEmotionType extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(

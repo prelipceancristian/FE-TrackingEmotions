@@ -1,4 +1,4 @@
-import 'src/dialogs/choose-emotion-type.dart' as app;
+import 'src/dialogs/pop-up-question.dart' as app;
 
 void main() {
   app.main();
