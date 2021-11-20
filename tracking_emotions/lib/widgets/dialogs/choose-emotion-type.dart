@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:chat_bubbles/chat_bubbles.dart';
+import 'package:tracking_emotions/widgets/dialogs/pop-up-question.dart';
 
 void main() {
   runApp(ChooseEmotionType());
@@ -72,7 +73,7 @@ class _HomePageState extends State<HomePage> {
               alignment: Alignment.bottomCenter,
               child: new Container(
                 width: MediaQuery.of(context).size.width,
-                height: 260,
+                height: 310,
                 margin: EdgeInsets.only(top: 300),
                 decoration:
                     BoxDecoration(color: Color.fromRGBO(156, 80, 82, 1)),
@@ -80,7 +81,7 @@ class _HomePageState extends State<HomePage> {
                   children: <Widget>[
                     new Container(
                       width: 350,
-                      margin: EdgeInsets.only(top: 30),
+                      margin: EdgeInsets.only(top: 20),
                       child: new TextButton(
                         onPressed: () {
                           print('Pressed!');
@@ -158,7 +159,37 @@ class _HomePageState extends State<HomePage> {
                           ),
                         ),
                       ),
-                    )
+                    ),
+                    new Container(
+                      width: 250,
+                      margin: EdgeInsets.only(top: 15, left: 100),
+                      child: new TextButton(
+                        onPressed: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => PopUpQuestion()));
+                        },
+                        child: Text(
+                          "I've changed my mind",
+                          style: TextStyle(color: Colors.white, fontSize: 20),
+                        ),
+                        style: ButtonStyle(
+                          padding: MaterialStateProperty.all<EdgeInsets>(
+                              EdgeInsets.only(
+                                  left: 15, right: 15, top: 10, bottom: 10)),
+                          backgroundColor:
+                              MaterialStateProperty.all(Colors.brown[1000]),
+                          shape:
+                              MaterialStateProperty.all<RoundedRectangleBorder>(
+                            RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(18.0),
+                              side: BorderSide(color: Colors.black),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
                   ],
                 ),
               ),

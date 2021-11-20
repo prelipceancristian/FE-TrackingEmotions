@@ -1,6 +1,16 @@
+import 'package:flutter/material.dart';
+import 'widgets/homepage/MyStatefulWidget.dart';
 
-import 'src/dialogs/pop-up-question.dart' as app;
+void main() => runApp(MyApp());
 
-void main() {
-  app.main();
+class MyApp extends StatelessWidget {
+  static const String _title = 'Flutter Code Sample';
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: _title,
+      home: MyStatefulWidget(),
+    );
+  }
 }
