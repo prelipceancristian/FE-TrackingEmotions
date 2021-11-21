@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tracking_emotions/widgets/emotions_info_page/emotion_info_page.dart';
+import 'package:tracking_emotions/widgets/emotions_report_page/emotions_report_page.dart';
 
 import 'HomeScreen.dart';
 
@@ -13,7 +14,7 @@ class MyStatefulWidget extends StatefulWidget {
 class _MyStatefulWidgetState extends State<MyStatefulWidget> {
   int selectedPage = 0;
 
-  final _pageOptions = [HomeScreen(), HomeScreen(), EmotionInfoPage()];
+  final _pageOptions = [EmotionsReportPage(), HomeScreen(), EmotionInfoPage()];
 
   @override
   Widget build(BuildContext context) {

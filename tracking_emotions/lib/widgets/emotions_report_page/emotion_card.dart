@@ -3,11 +3,11 @@
 import 'package:flutter/material.dart';
 
 class EmotionCard extends StatelessWidget {
-  final String? heading;
-  final String? subheading;
-  final String? supportingText;
+  final String heading;
+  final String subheading;
+  final String supportingText;
   const EmotionCard(
-      {Key? key, this.heading, this.subheading, this.supportingText})
+      {Key key, this.heading, this.subheading, this.supportingText})
       : super(key: key);
 
   @override

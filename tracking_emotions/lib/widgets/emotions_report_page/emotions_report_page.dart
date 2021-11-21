@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:tracking_emotions/emotion_card.dart';
+import 'package:tracking_emotions/widgets/emotions_report_page/emotion_card.dart';
 
 class EmotionsReportPage extends StatelessWidget {
-  const EmotionsReportPage({Key? key}) : super(key: key);
+  const EmotionsReportPage({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
