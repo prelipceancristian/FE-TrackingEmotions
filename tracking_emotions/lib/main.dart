@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:tracking_emotions/submit_emotion_record_page/submitEmotionRecordPage.dart';
+import 'package:tracking_emotions/widgets/login-page.dart';
 
 void main() => runApp(MyApp());
 
@@ -10,7 +10,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: _title,
-      home: MyStatefulWidget(),
+      home: LoginScreen(),
     );
   }
 }
