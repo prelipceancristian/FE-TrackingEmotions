@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:chat_bubbles/chat_bubbles.dart';
+import 'package:tracking_emotions/widgets/choose-category/choose_category_screen.dart';
 import 'package:tracking_emotions/widgets/dialogs/pop-up-question.dart';
 
 void main() {
@@ -85,6 +86,11 @@ class _HomePageState extends State<HomePage> {
                       child: new TextButton(
                         onPressed: () {
                           print('Pressed!');
+
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => ChooseCategory()));
                           //:TODO Send to next screen
                         },
                         child: Text(
@@ -112,6 +118,11 @@ class _HomePageState extends State<HomePage> {
                       child: new TextButton(
                         onPressed: () {
                           print('Pressed!');
+
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => ChooseCategory()));
                           //:TODO Send to next screen
                         },
                         child: Text(
@@ -139,6 +150,11 @@ class _HomePageState extends State<HomePage> {
                       child: new TextButton(
                         onPressed: () {
                           print('Pressed!');
+
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => ChooseCategory()));
                           //:TODO Send to next screen
                         },
                         child: Text(

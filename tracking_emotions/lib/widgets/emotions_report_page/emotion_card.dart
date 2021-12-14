@@ -14,7 +14,9 @@ class EmotionCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Card(
         elevation: 5.0,
+        color: Color.fromARGB(255, 249, 187, 178),
         shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(30.0),
           side: BorderSide(
             color: Colors.black,
             width: 2.0,
