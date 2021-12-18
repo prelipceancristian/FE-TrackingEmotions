@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:tracking_emotions/MyStatefulWidget.dart';
 import 'package:tracking_emotions/utils/constants.dart';
 import 'package:tracking_emotions/utils/services/authentication-services/authentication-controller.dart';
 import 'package:tracking_emotions/widgets/homepage/MyStatefulWidget.dart';
