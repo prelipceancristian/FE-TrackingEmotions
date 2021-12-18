@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:tracking_emotions/widgets/submit_emotion_record_page/submitEmotionRecordPage.dart';
 import 'choose-emotion-type.dart';
