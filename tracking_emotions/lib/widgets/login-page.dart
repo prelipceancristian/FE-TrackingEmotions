@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:tracking_emotions/MyStatefulWidget.dart';
 import 'package:tracking_emotions/utils/constants.dart';
 import 'package:tracking_emotions/utils/services/authentication-services/authentication-controller.dart';
+import 'package:tracking_emotions/widgets/homepage/MyStatefulWidget.dart';
 
 class LoginScreen extends StatefulWidget {
   @override
@@ -106,7 +107,9 @@ class _LoginScreenState extends State<LoginScreen> {
         ),
         onPressed: () => {
           //TODO: add login functionality
-          _loginFormKey.currentState.validate()
+          _loginFormKey.currentState.validate(),
+          Navigator.push(context,
+              MaterialPageRoute(builder: (context) => MyStatefulWidget())),
         },
         child: Text(
           'LOGIN',

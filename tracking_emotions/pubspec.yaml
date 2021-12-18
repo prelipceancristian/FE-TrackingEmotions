@@ -20,7 +20,10 @@ version: 1.0.0+1
 environment:
   sdk: ">=2.7.0 <3.0.0"
 
+  dependencies:
+  chat_bubbles: ^1.1.0
 dependencies:
+
   flutter:
     sdk: flutter
 
@@ -30,6 +33,7 @@ dependencies:
   cupertino_icons: ^1.0.0
   google_sign_in: ^5.2.1
   flutter_facebook_auth: ^3.5.6
+  chat_bubbles: ^1.1.0
 
 dev_dependencies:
   flutter_test:

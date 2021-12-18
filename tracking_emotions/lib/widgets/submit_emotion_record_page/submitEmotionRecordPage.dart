@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tracking_emotions/widgets/after-submit/congratiulations-page.dart';
 
 import './selector.dart';
 import 'submitEmotionRecordPageText.dart';
@@ -11,37 +12,33 @@ class SubmitEmotionRecordPage extends StatefulWidget {
 
 class _SubmitEmotionRecordPageState extends State<SubmitEmotionRecordPage> {
   final List<String> emotions = [
-    'fericit',
-    'suparat',
-    'melancolic',
-    'a',
-    'b',
-    'c',
-    'd',
-    'e',
-    'f',
-    'g',
-    'h',
-    'i',
-    'j',
-    'k',
-    'l',
-    'm',
-    'n',
-    'o',
-    'p',
+    'sad',
+    'happy',
+    'enthuziastic',
+    'angry',
+    'gealous',
+    'nostalgic',
+    'disgusted',
+    'worried',
+    'grateful',
+    'annoyed',
+    'passionate',
+    'exhausted',
+    'fearless',
+    'shy',
+    'tired',
   ];
 
   final List<String> locations = [
-    'valcea',
-    'cluj',
-    'oradea',
+    'home',
+    'university',
+    'Cluj',
   ];
 
   final List<String> people = [
-    'andrei',
-    'alex',
-    'FLORIN',
+    'Andrei',
+    'Alex',
+    'Florin',
   ];
 
   Selector emotionSelector;
@@ -79,11 +76,6 @@ class _SubmitEmotionRecordPageState extends State<SubmitEmotionRecordPage> {
         scaffoldBackgroundColor: const Color(0xffffd1d1),
       ),
       home: Scaffold(
-        appBar: AppBar(
-          title: Text(
-            'Submit your emotion',
-          ),
-        ),
         body: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -140,5 +132,7 @@ class _SubmitEmotionRecordPageState extends State<SubmitEmotionRecordPage> {
 
   void onPressed() {
     print(selectedEmotion + " " + selectedLocation + " " + selectedPerson);
+    Navigator.push(context,
+        MaterialPageRoute(builder: (context) => CongratulationsPage()));
   }
 }
