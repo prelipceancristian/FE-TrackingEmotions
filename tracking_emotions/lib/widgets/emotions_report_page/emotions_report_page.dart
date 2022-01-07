@@ -52,6 +52,7 @@ class _MyHomePageState extends State<MyHomePage> {
         title: Text(widget.title),
       ),
       body: Container(
+          decoration: BoxDecoration(color: Color.fromARGB(255, 250, 237, 227)),
           padding: const EdgeInsets.all(18.0),
           child: ListView.builder(
               itemCount: emotions.length,
