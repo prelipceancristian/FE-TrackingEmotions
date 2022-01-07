@@ -2,9 +2,21 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:tracking_emotions/utils/constants.dart';
-import 'package:tracking_emotions/widgets/homepage/MyStatefulWidget.dart';
 
 import '../login-page.dart';
+
+void main() {
+  runApp(RegisterPage());
+}
+
+class RegisterPage extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      home: RegisterScreen(),
+    );
+  }
+}
 
 class RegisterScreen extends StatefulWidget {
   @override
@@ -146,7 +158,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
             autovalidateMode: AutovalidateMode.onUserInteraction,
             obscureText: true,
             validator: (value) {
-              return value == passwordController.value ? 'Passwords do not march!' : null;
+              return value ==  "" ? 'Passwords do not march!' : null;
             },
             style: TextStyle(
               color: Colors.black,
