@@ -115,79 +115,60 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Color.fromARGB(255, 250, 237, 227),
-        body: Padding(
-          padding: const EdgeInsets.all(10),
-          child: Column(
-            children: [
-              const SizedBox(
-                height: 20,
-              ),
-              TextField(
-                  onChanged: (value) => _runFilter(value),
-                  decoration: InputDecoration(
-                      prefixIcon: Icon(Icons.search),
-                      labelText: 'Search for an emotion',
-                      border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(30.0)),
-                      filled: true,
-                      fillColor: Colors.white70)),
-              const SizedBox(
-                height: 20,
-              ),
-              Expanded(
-                child: _foundUsers.isNotEmpty
-                    ? ListView.builder(
-                        itemCount: _foundUsers.length,
-                        itemBuilder: (context, index) => Card(
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(30.0)),
-                          key: ValueKey(_foundUsers[index]["id"]),
-                          color: Color.fromARGB(255, 249, 187, 178),
-                          elevation: 10,
-                          margin: const EdgeInsets.symmetric(
-                              vertical: 14, horizontal: 10),
-                          child: ListTile(
-                            title: Padding(
-                                padding: EdgeInsets.only(
-                                    left: 12, top: 8, right: 12),
-                                child: Text(_foundUsers[index]['name'],
-                                    style: const TextStyle(fontSize: 24))),
-                            subtitle: Padding(
-                                padding: EdgeInsets.only(
-                                    left: 9, top: 8, right: 9, bottom: 25),
-                                child: Text(_foundUsers[index]['description'],
-                                    style: const TextStyle(fontSize: 18))),
-                          ),
+      backgroundColor: Color.fromARGB(255, 250, 237, 227),
+      body: Padding(
+        padding: const EdgeInsets.all(10),
+        child: Column(
+          children: [
+            const SizedBox(
+              height: 20,
+            ),
+            TextField(
+                onChanged: (value) => _runFilter(value),
+                decoration: InputDecoration(
+                    prefixIcon: Icon(Icons.search),
+                    labelText: 'Search for an emotion',
+                    border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(30.0)),
+                    filled: true,
+                    fillColor: Colors.white70)),
+            const SizedBox(
+              height: 20,
+            ),
+            Expanded(
+              child: _foundUsers.isNotEmpty
+                  ? ListView.builder(
+                      itemCount: _foundUsers.length,
+                      itemBuilder: (context, index) => Card(
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(30.0)),
+                        key: ValueKey(_foundUsers[index]["id"]),
+                        color: Color.fromARGB(255, 249, 187, 178),
+                        elevation: 10,
+                        margin: const EdgeInsets.symmetric(
+                            vertical: 14, horizontal: 10),
+                        child: ListTile(
+                          title: Padding(
+                              padding:
+                                  EdgeInsets.only(left: 12, top: 8, right: 12),
+                              child: Text(_foundUsers[index]['name'],
+                                  style: const TextStyle(fontSize: 24))),
+                          subtitle: Padding(
+                              padding: EdgeInsets.only(
+                                  left: 9, top: 8, right: 9, bottom: 25),
+                              child: Text(_foundUsers[index]['description'],
+                                  style: const TextStyle(fontSize: 18))),
                         ),
-                      )
-                    : const Text(
-                        'No results found',
-                        style: TextStyle(fontSize: 24),
                       ),
-              ),
-            ],
-          ),
-        ),
-        bottomNavigationBar: BottomNavigationBar(
-          items: [
-            BottomNavigationBarItem(
-                icon: Icon(IconData(0xea39, fontFamily: 'MaterialIcons')),
-                label: 'Stats'),
-            BottomNavigationBarItem(
-                icon: Icon(IconData(61267, fontFamily: 'MaterialIcons')),
-                label: 'Home'),
-            BottomNavigationBarItem(
-                icon: Icon(IconData(63647, fontFamily: 'MaterialIcons')),
-                label: 'Emotions')
+                    )
+                  : const Text(
+                      'No results found',
+                      style: TextStyle(fontSize: 24),
+                    ),
+            ),
           ],
-          selectedItemColor: Color.fromRGBO(255, 103, 83, 1.0),
-          elevation: 5.0,
-          unselectedItemColor: Color.fromRGBO(255, 165, 117, 1.0),
-          selectedLabelStyle:
-              TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
-          unselectedLabelStyle: TextStyle(fontSize: 15),
-          backgroundColor: Color.fromRGBO(255, 255, 255, 1),
-        ));
+        ),
+      ),
+    );
   }
 }
