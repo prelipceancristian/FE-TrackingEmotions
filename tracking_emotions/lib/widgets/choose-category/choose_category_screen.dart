@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:chat_bubbles/chat_bubbles.dart';
 import 'package:tracking_emotions/models/emotion-category.dart';
-import 'package:tracking_emotions/utils/services/authentication-services/category-service.dart';
+import 'package:tracking_emotions/utils/services/category-service.dart';
 import 'package:tracking_emotions/widgets/submit_emotion_record_page/submitEmotionRecordPage.dart';
 
 class ChooseCategory extends StatelessWidget {
@@ -50,11 +50,11 @@ class _HomePageState extends State<HomePage> {
     List<EmotionCategory> emotionCategoryList =
         await this._categoryService.getCategory(this._valence);
 
-    for (int i = 0; i < emotionCategoryList.length; i++) {
+    emotionCategoryList.forEach((emotionCategory) {
       menuItems.add(DropdownMenuItem(
-          child: Text(emotionCategoryList[i].Name),
-          value: emotionCategoryList[i].EmotionCategoryID.toString()));
-    }
+          child: Text(emotionCategory.Name),
+          value: emotionCategory.EmotionCategoryID.toString()));
+    });
     return menuItems;
   }
 
