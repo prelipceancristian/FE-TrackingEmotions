@@ -8,12 +8,15 @@ class User {
   final String Gender;
   final String Email;
 
-  User({
-    this.UserId,
-    this.LastName,
-    this.FirstName,
-    this.Email,
-  });
+  User(
+      {this.UserId,
+      this.LastName,
+      this.FirstName,
+      this.Email,
+      this.BirthDate,
+      this.Username,
+      this.Password,
+      this.Gender});
 
   factory User.fromJson(Map<String, dynamic> json) {
     return User(

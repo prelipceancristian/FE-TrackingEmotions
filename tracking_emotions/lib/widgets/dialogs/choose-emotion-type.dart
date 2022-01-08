@@ -86,8 +86,7 @@ class _HomePageState extends State<HomePage> {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => ChooseCategory()));
-                          //:TODO Send to next screen
+                                  builder: (context) => ChooseCategory(1)));
                         },
                         child: Text(
                           "Positive",
@@ -118,7 +117,7 @@ class _HomePageState extends State<HomePage> {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => ChooseCategory()));
+                                  builder: (context) => ChooseCategory(-1)));
                           //:TODO Send to next screen
                         },
                         child: Text(
@@ -150,7 +149,7 @@ class _HomePageState extends State<HomePage> {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => ChooseCategory()));
+                                  builder: (context) => ChooseCategory(0)));
                           //:TODO Send to next screen
                         },
                         child: Text(

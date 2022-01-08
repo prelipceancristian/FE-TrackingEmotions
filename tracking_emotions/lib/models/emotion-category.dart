@@ -15,11 +15,11 @@ class EmotionCategory {
 
   factory EmotionCategory.fromJson(Map<String, dynamic> json) {
     return EmotionCategory(
-      EmotionCategoryID: json['EmotionCategoryID'],
-      Name: json['Name'],
-      ValenceID: json['ValenceID'],
-      Description: json['Description'],
-      DescriptionID: json['DescriptionID'],
+      EmotionCategoryID: json['emotionCategoryID'],
+      Name: json['name'],
+      ValenceID: json['valenceID'],
+      Description: json['description'],
+      DescriptionID: json['descriptionID'],
     );
   }
 }
