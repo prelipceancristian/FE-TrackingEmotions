@@ -10,15 +10,24 @@ class User {
 
   User({
     this.UserId,
-    this.LastName,
     this.FirstName,
+    this.LastName,
+    this.BirthDate,
+    this.Username,
+    this.Password,
+    this.Gender,
     this.Email,
   });
 
   factory User.fromJson(Map<String, dynamic> json) {
     return User(
       UserId: json['userId'],
-      FirstName: json['id'],
+      FirstName: json['FirstName'],
+      LastName: json['LastName'],
+      BirthDate: json['BirthDate'],
+      Username: json['Username'],
+      Password: json['Password'],
+      Gender: json['Gender'],
       Email: json['title'],
     );
   }
