@@ -11,7 +11,7 @@ class TrackingEmotionsHttpRequests {
     int index = 0;
     String formattedUrl = this.url + additionalUrl + '?';
     parameters.forEach((key, value) {
-      if (index > 1) {
+      if (index >= 1) {
         formattedUrl += '&';
       }
       formattedUrl += key.toString() + '=' + value.toString();
@@ -24,7 +24,7 @@ class TrackingEmotionsHttpRequests {
     int index = 0;
     String formattedUrl = this.url + additionalUrl + '?';
     parameters.forEach((key, value) {
-      if (index > 1) {
+      if (index >= 1) {
         formattedUrl += '&';
       }
       formattedUrl += key.toString() + '=' + value.toString();
@@ -37,7 +37,7 @@ class TrackingEmotionsHttpRequests {
     int index = 0;
     String formattedUrl = this.url + additionalUrl + '?';
     parameters.forEach((key, value) {
-      if (index > 1) {
+      if (index >= 1) {
         formattedUrl += '&';
       }
       formattedUrl += key.toString() + '=' + value.toString();
@@ -50,7 +50,7 @@ class TrackingEmotionsHttpRequests {
     int index = 0;
     String formattedUrl = this.url + additionalUrl + '?';
     parameters.forEach((key, value) {
-      if (index > 1) {
+      if (index >= 1) {
         formattedUrl += '&';
       }
       formattedUrl += key.toString() + '=' + value.toString();
