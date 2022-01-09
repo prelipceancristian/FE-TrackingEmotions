@@ -13,6 +13,7 @@ class TrackingEmotionsHttpRequests {
     parameters.forEach((key, value) {
       if (index == 0) {
         formattedUrl += '?';
+      }
       if (index >= 1) {
         formattedUrl += '&';
       }
@@ -28,6 +29,7 @@ class TrackingEmotionsHttpRequests {
     parameters.forEach((key, value) {
       if (index == 0) {
         formattedUrl += '?';
+      }
       if (index >= 1) {
         formattedUrl += '&';
       }
@@ -43,6 +45,7 @@ class TrackingEmotionsHttpRequests {
     parameters.forEach((key, value) {
       if (index == 0) {
         formattedUrl += '?';
+      }
       if (index >= 1) {
         formattedUrl += '&';
       }
@@ -58,6 +61,7 @@ class TrackingEmotionsHttpRequests {
     parameters.forEach((key, value) {
       if (index == 0) {
         formattedUrl += '?';
+      }
       if (index >= 1) {
         formattedUrl += '&';
       }
