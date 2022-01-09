@@ -9,8 +9,10 @@ class TrackingEmotionsHttpRequests {
 
   Future<http.Response> fetchData(Map parameters, String additionalUrl) async {
     int index = 0;
-    String formattedUrl = this.url + additionalUrl + '?';
+    String formattedUrl = this.url + additionalUrl;
     parameters.forEach((key, value) {
+      if (index == 0) {
+        formattedUrl += '?';
       if (index >= 1) {
         formattedUrl += '&';
       }
@@ -22,8 +24,10 @@ class TrackingEmotionsHttpRequests {
 
   Future<http.Response> postData(Map parameters, String additionalUrl) async {
     int index = 0;
-    String formattedUrl = this.url + additionalUrl + '?';
+    String formattedUrl = this.url + additionalUrl;
     parameters.forEach((key, value) {
+      if (index == 0) {
+        formattedUrl += '?';
       if (index >= 1) {
         formattedUrl += '&';
       }
@@ -35,8 +39,10 @@ class TrackingEmotionsHttpRequests {
 
   Future<http.Response> deleteData(Map parameters, String additionalUrl) async {
     int index = 0;
-    String formattedUrl = this.url + additionalUrl + '?';
+    String formattedUrl = this.url + additionalUrl;
     parameters.forEach((key, value) {
+      if (index == 0) {
+        formattedUrl += '?';
       if (index >= 1) {
         formattedUrl += '&';
       }
@@ -48,8 +54,10 @@ class TrackingEmotionsHttpRequests {
 
   Future<http.Response> putData(Map parameters, String additionalUrl) async {
     int index = 0;
-    String formattedUrl = this.url + additionalUrl + '?';
+    String formattedUrl = this.url + additionalUrl;
     parameters.forEach((key, value) {
+      if (index == 0) {
+        formattedUrl += '?';
       if (index >= 1) {
         formattedUrl += '&';
       }
