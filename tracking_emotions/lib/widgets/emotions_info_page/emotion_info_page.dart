@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:tracking_emotions/models/emotion.dart';
+import 'package:tracking_emotions/utils/services/emotions-service.dart';
 
 class EmotionInfoPage extends StatelessWidget {
   const EmotionInfoPage({key}) : super(key: key);
@@ -8,7 +10,6 @@ class EmotionInfoPage extends StatelessWidget {
     return const MaterialApp(
       // Remove the debug banner
       debugShowCheckedModeBanner: false,
-      title: 'Kindacode.com',
       home: HomePage(),
     );
   }
@@ -22,66 +23,97 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  EmotionService _emotionService = new EmotionService();
+  List<Map<String, dynamic>> _allUsers = [];
+
+  Future<List<Map<String, dynamic>>> getEmotions() async {
+    List<Map<String, dynamic>> menuItems = [];
+    List<Emotion> emotionList = await this._emotionService.getEmotions();
+
+    emotionList.forEach((emotion) {
+      menuItems.add({
+        "id": emotion.EmotionID,
+        "name": emotion.Name,
+        "description": emotion.DescriptionID
+        //TO DO: must bring the text Description here!!
+      });
+    });
+    return menuItems;
+  }
+
+  setMenuItems() async {
+    var backendMenuItems = await getEmotions();
+    this.setState(() {
+      _allUsers = backendMenuItems;
+    });
+  }
+
+  @override
+  void initState() {
+    setMenuItems();
+    super.initState();
+  }
+
   // This holds a list of fiction users
   // You can use data fetched from a database or a server as well
-  final List<Map<String, dynamic>> _allUsers = [
-    {
-      "id": 1,
-      "name": "Fericire",
-      "description":
-          "Fericirea este o stare mentală de bine, fiind caracterizată de emoţii pozitive sau plăcute, de la mulţumire la bucurie intensă.",
-    },
-    {
-      "id": 2,
-      "name": "Ușurare",
-      "description": "Te simți eliberat de sub apăsarea unui lucru greu.",
-    },
-    {
-      "id": 3,
-      "name": "Mulțumire",
-      "description":
-          "Sfaturi: Cultiva-ti vorbirea intr-o voce calda, joasa. Nu lasa niciodata sa treaca o ocazie fara sa incurajezi pe cineva sau sa spui ceva frumos cuiva.",
-    },
-    {
-      "id": 4,
-      "name": "Binecuvântare",
-      "description":
-          "Fă o listă de lucruri și oameni pentru care ești recunoscător în viața ta.",
-    },
-    {
-      "id": 5,
-      "name": "Încântare",
-      "description": "Ce ai auzit/văzut/simțit/experimentat astăzi frumos?",
-    },
-    {
-      "id": 6,
-      "name": "Amuzare",
-      "description": "Ai auzit o glumă bună?",
-    },
-    {
-      "id": 7,
-      "name": "Mândrie",
-      "description": "Ce ai realizat astăzi minunat?",
-    },
-    {
-      "id": 8,
-      "name": "Răsplătire",
-      "description":
-          "Ai muncit din greu pentru ceva anume și ai fost remunerat pe măsură.",
-    },
-    {
-      "id": 9,
-      "name": "Satisfăcere",
-      "description":
-          "Ai muncit din greu pentru ceva anume și ți-a ieșit cum ți-ai propus.",
-    },
-    {
-      "id": 10,
-      "name": "Optimism",
-      "description":
-          "Orice s-ar întâmpla acum, vezi partea pozitivă a lucrurilor.",
-    },
-  ];
+  // final List<Map<String, dynamic>> _allUsers = [
+  //   {
+  //     "id": 1,
+  //     "name": "Fericire",
+  //     "description":
+  //         "Fericirea este o stare mentală de bine, fiind caracterizată de emoţii pozitive sau plăcute, de la mulţumire la bucurie intensă.",
+  //   },
+  //   {
+  //     "id": 2,
+  //     "name": "Ușurare",
+  //     "description": "Te simți eliberat de sub apăsarea unui lucru greu.",
+  //   },
+  //   {
+  //     "id": 3,
+  //     "name": "Mulțumire",
+  //     "description":
+  //         "Sfaturi: Cultiva-ti vorbirea intr-o voce calda, joasa. Nu lasa niciodata sa treaca o ocazie fara sa incurajezi pe cineva sau sa spui ceva frumos cuiva.",
+  //   },
+  //   {
+  //     "id": 4,
+  //     "name": "Binecuvântare",
+  //     "description":
+  //         "Fă o listă de lucruri și oameni pentru care ești recunoscător în viața ta.",
+  //   },
+  //   {
+  //     "id": 5,
+  //     "name": "Încântare",
+  //     "description": "Ce ai auzit/văzut/simțit/experimentat astăzi frumos?",
+  //   },
+  //   {
+  //     "id": 6,
+  //     "name": "Amuzare",
+  //     "description": "Ai auzit o glumă bună?",
+  //   },
+  //   {
+  //     "id": 7,
+  //     "name": "Mândrie",
+  //     "description": "Ce ai realizat astăzi minunat?",
+  //   },
+  //   {
+  //     "id": 8,
+  //     "name": "Răsplătire",
+  //     "description":
+  //         "Ai muncit din greu pentru ceva anume și ai fost remunerat pe măsură.",
+  //   },
+  //   {
+  //     "id": 9,
+  //     "name": "Satisfăcere",
+  //     "description":
+  //         "Ai muncit din greu pentru ceva anume și ți-a ieșit cum ți-ai propus.",
+  //   },
+  //   {
+  //     "id": 10,
+  //     "name": "Optimism",
+  //     "description":
+  //         "Orice s-ar întâmpla acum, vezi partea pozitivă a lucrurilor.",
+  //   },
+  // ];
 
   // This list holds the data for the list view
   List<Map<String, dynamic>> _foundUsers = [];
