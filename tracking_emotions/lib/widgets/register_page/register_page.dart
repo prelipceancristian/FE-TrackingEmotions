@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:tracking_emotions/utils/constants.dart';
@@ -22,6 +21,7 @@ class RegisterScreen extends StatefulWidget {
   @override
   _RegisterScreenState createState() => _RegisterScreenState();
 }
+
 class _RegisterScreenState extends State<RegisterScreen> {
   TextEditingController nameController = TextEditingController();
   TextEditingController emailController = TextEditingController();
@@ -29,8 +29,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
   TextEditingController confirmPasswordController = TextEditingController();
   final loginFormKey = GlobalKey<FormState>();
 
-
-  Widget buildUsernameField(){
+  Widget buildUsernameField() {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
@@ -68,7 +67,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
     );
   }
 
-  Widget buildEmailField(){
+  Widget buildEmailField() {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
@@ -106,7 +105,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
     );
   }
 
-  Widget buildPasswordField(){
+  Widget buildPasswordField() {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
@@ -143,7 +142,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
     );
   }
 
-  Widget buildConfirmPasswordField(){
+  Widget buildConfirmPasswordField() {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
@@ -158,7 +157,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
             autovalidateMode: AutovalidateMode.onUserInteraction,
             obscureText: true,
             validator: (value) {
-              return value ==  "" ? 'Passwords do not march!' : null;
+              return value == "" ? 'Passwords do not march!' : null;
             },
             style: TextStyle(
               color: Colors.black,
@@ -185,8 +184,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
       onTap: () => {
         // TODO: add a route to register page
         loginFormKey.currentState.validate(),
-        Navigator.push(context,
-            MaterialPageRoute(builder: (context) => LoginScreen())),
+        Navigator.push(
+            context, MaterialPageRoute(builder: (context) => LoginScreen())),
       },
       child: RichText(
         text: TextSpan(
@@ -229,8 +228,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
         onPressed: () => {
           //TODO: REGISTER
           loginFormKey.currentState.validate(),
-          Navigator.push(context,
-              MaterialPageRoute(builder: (context) => LoginScreen())),
+          Navigator.push(
+              context, MaterialPageRoute(builder: (context) => LoginScreen())),
         },
         child: Text(
           'REGISTER',
@@ -304,5 +303,4 @@ class _RegisterScreenState extends State<RegisterScreen> {
       ),
     );
   }
-  
 }

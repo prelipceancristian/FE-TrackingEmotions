@@ -8,15 +8,7 @@ class EmotionsReportPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: ThemeData(
-        // Define the default brightness and colors.
-        brightness: Brightness.light,
-        primaryColor: Colors.pink.shade100,
-        fontFamily: 'Georgia',
-        textTheme: const TextTheme(
-          headline1: TextStyle(fontSize: 36.0, fontWeight: FontWeight.bold),
-          headline6: TextStyle(fontSize: 29.0, fontStyle: FontStyle.italic),
-          bodyText2: TextStyle(fontSize: 14.0, fontFamily: 'Hind'),
-        ),
+        scaffoldBackgroundColor: const Color(0xffffd1d1),
       ),
       debugShowCheckedModeBanner: false,
       home: const MyHomePage(title: 'Your tracked emotions'),
@@ -60,7 +52,8 @@ class _MyHomePageState extends State<MyHomePage> {
                 return EmotionCard(
                     heading: emotions[index][0],
                     subheading: emotions[index][1],
-                    supportingText: emotions[index][2]);
+                    supportingText: emotions[index][2],
+                    time: emotions[index][3]);
               })),
       // )
     );
