@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "392100821353",
+    "project_id": "trackingemotions",
+    "storage_bucket": "trackingemotions.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:392100821353:android:38e320fa1caf48042365f8",
+        "android_client_info": {
+          "package_name": "com.example.tracking_emotions"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "392100821353-poaon2om3k91lofv4l45k5podi0c0u45.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.tracking_emotions",
+            "certificate_hash": "169ba785c5b39ba85f0a1146b3ad2ab6284c9649"
+          }
+        },
+        {
+          "client_id": "392100821353-ihbtkpecb55bhrgoqtg7gbnl01jl8fl8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC1kGzY_D96oWcGh43pFqlvpUGxLEnFjZw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "392100821353-ihbtkpecb55bhrgoqtg7gbnl01jl8fl8.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
