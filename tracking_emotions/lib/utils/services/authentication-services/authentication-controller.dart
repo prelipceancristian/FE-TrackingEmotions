@@ -1,4 +1,5 @@
 import 'package:tracking_emotions/utils/services/authentication-services/authentication-service-interface.dart';
+import 'package:tracking_emotions/utils/services/authentication-services/default-authentication-service.dart';
 import 'package:tracking_emotions/utils/services/authentication-services/facebook-authentication-service.dart';
 import 'package:tracking_emotions/utils/services/authentication-services/google-authentication-service.dart';
 
@@ -27,8 +28,8 @@ class AuthenticationController {
     await authenticationService.logOut();
   }
 
-  Future<bool> login() async {
-    return await authenticationService.login();
+  Future<bool> login(String username, String password) async {
+    return await authenticationService.login(username, password);
   }
 
   void initializeGoogleAuthentication() {
@@ -37,6 +38,10 @@ class AuthenticationController {
 
   void initializeFacebookAuthentication() {
     this.authenticationService = new FacebookAuthenticationService();
+  }
+
+  void initializeDefaultAuthentication() {
+    this.authenticationService = new DefaultAuthenticationService();
   }
 
   String getName() {
@@ -60,6 +65,8 @@ class AuthenticationController {
         new GoogleAuthenticationService();
     final FacebookAuthenticationService facebookAuthenticationService =
         new FacebookAuthenticationService();
+    final DefaultAuthenticationService defaultAuthenticationService =
+        new DefaultAuthenticationService();
 
     if (await googleAuthenticationService.isSignedIn()) {
       this.authenticationService = googleAuthenticationService;
@@ -67,6 +74,10 @@ class AuthenticationController {
 
     if (await facebookAuthenticationService.isSignedIn()) {
       this.authenticationService = facebookAuthenticationService;
+    }
+
+    if (await defaultAuthenticationService.isSignedIn()) {
+      this.authenticationService = defaultAuthenticationService;
     }
   }
 }

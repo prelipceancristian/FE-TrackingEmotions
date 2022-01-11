@@ -1,8 +1,8 @@
 class User {
-  final int UserId;
+  final String UserId;
   final String FirstName;
   final String LastName;
-  final DateTime BirthDate;
+  final String BirthDate;
   final String Username;
   final String Password;
   final String Gender;
@@ -20,9 +20,12 @@ class User {
 
   factory User.fromJson(Map<String, dynamic> json) {
     return User(
-      UserId: json['userId'],
-      FirstName: json['id'],
-      Email: json['title'],
-    );
+        UserId: json['userId'].toString(),
+        FirstName: json['firstName'],
+        Email: json['email'],
+        LastName: json['lastName'],
+        Gender: json['gender'],
+        Username: json['username'],
+        BirthDate: json['birthDate']);
   }
 }

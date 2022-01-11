@@ -1,13 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:tracking_emotions/models/user.dart';
 import 'package:tracking_emotions/utils/constants.dart';
+import 'package:tracking_emotions/utils/services/user-service.dart';
 
 import '../login-page.dart';
-
-void main() {
-  runApp(RegisterPage());
-}
 
 class RegisterPage extends StatelessWidget {
   @override
@@ -22,15 +20,16 @@ class RegisterScreen extends StatefulWidget {
   @override
   _RegisterScreenState createState() => _RegisterScreenState();
 }
+
 class _RegisterScreenState extends State<RegisterScreen> {
   TextEditingController nameController = TextEditingController();
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   TextEditingController confirmPasswordController = TextEditingController();
+  UserService userService = new UserService();
   final loginFormKey = GlobalKey<FormState>();
 
-
-  Widget buildUsernameField(){
+  Widget buildUsernameField() {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
@@ -68,7 +67,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
     );
   }
 
-  Widget buildEmailField(){
+  Widget buildEmailField() {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
@@ -106,7 +105,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
     );
   }
 
-  Widget buildPasswordField(){
+  Widget buildPasswordField() {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
@@ -143,7 +142,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
     );
   }
 
-  Widget buildConfirmPasswordField(){
+  Widget buildConfirmPasswordField() {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
@@ -158,7 +157,11 @@ class _RegisterScreenState extends State<RegisterScreen> {
             autovalidateMode: AutovalidateMode.onUserInteraction,
             obscureText: true,
             validator: (value) {
-              return value ==  "" ? 'Passwords do not march!' : null;
+              return value == ""
+                  ? 'Password can\'t be empty!'
+                  : value != this.passwordController.text
+                      ? 'Passwords do not march!'
+                      : null;
             },
             style: TextStyle(
               color: Colors.black,
@@ -185,8 +188,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
       onTap: () => {
         // TODO: add a route to register page
         loginFormKey.currentState.validate(),
-        Navigator.push(context,
-            MaterialPageRoute(builder: (context) => LoginScreen())),
+        Navigator.push(
+            context, MaterialPageRoute(builder: (context) => LoginScreen())),
       },
       child: RichText(
         text: TextSpan(
@@ -214,6 +217,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
   }
 
   Widget buildRegisterBtn() {
+    bool validate;
     return Container(
       padding: EdgeInsets.symmetric(vertical: 25.0),
       width: double.infinity,
@@ -226,11 +230,15 @@ class _RegisterScreenState extends State<RegisterScreen> {
           ),
           primary: Color.fromARGB(255, 249, 187, 178),
         ),
-        onPressed: () => {
-          //TODO: REGISTER
-          loginFormKey.currentState.validate(),
-          Navigator.push(context,
-              MaterialPageRoute(builder: (context) => LoginScreen())),
+        onPressed: () async => {
+          validate = loginFormKey.currentState.validate(),
+          if (validate)
+            {
+              await _register(
+                  this.nameController.text,
+                  this.confirmPasswordController.text,
+                  this.emailController.text)
+            }
         },
         child: Text(
           'REGISTER',
@@ -244,6 +252,25 @@ class _RegisterScreenState extends State<RegisterScreen> {
         ),
       ),
     );
+  }
+
+  Future<dynamic> _register(
+      String username, String password, String email) async {
+    User user = new User(Username: username, Password: password, Email: email);
+
+    final result = await this.userService.registerUser(user);
+
+    if (result) {
+      ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text("The register was successful!")));
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => LoginScreen()),
+      );
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+          content: Text("There was something wrong with the authentication.")));
+    }
   }
 
   @override
@@ -304,5 +331,4 @@ class _RegisterScreenState extends State<RegisterScreen> {
       ),
     );
   }
-  
 }

@@ -1,8 +1,12 @@
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
+import 'package:tracking_emotions/models/user.dart';
 import 'package:tracking_emotions/utils/services/authentication-services/authentication-service-interface.dart';
+
+import '../user-service.dart';
 
 class FacebookAuthenticationService implements AuthenticationServiceInterface {
   Map<String, dynamic> _userData;
+  UserService _userService = new UserService();
   static final FacebookAuthenticationService _facebookAuthenticationService =
       FacebookAuthenticationService.internal();
 
@@ -31,13 +35,21 @@ class FacebookAuthenticationService implements AuthenticationServiceInterface {
   }
 
   @override
-  Future<bool> login() async {
+  Future<bool> login(String username, String password) async {
     final LoginResult result = await FacebookAuth.instance.login();
 
     if (result.status == LoginStatus.success) {
       final userData = await FacebookAuth.instance.getUserData();
-      this._userData = userData;
-      return true;
+      User user = new User(
+          UserId: userData['id'],
+          FirstName: userData['name'],
+          Email: userData['email']);
+
+      bool result = await this._userService.socialLogin(user);
+      if (result) {
+        this._userData = userData;
+        return true;
+      }
     }
 
     return false;
