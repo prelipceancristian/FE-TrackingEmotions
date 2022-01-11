@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:tracking_emotions/models/user.dart';
 import 'package:tracking_emotions/utils/constants.dart';
+import 'package:tracking_emotions/utils/services/user-service.dart';
 
 import '../login-page.dart';
-
-void main() {
-  runApp(RegisterPage());
-}
 
 class RegisterPage extends StatelessWidget {
   @override
@@ -27,6 +25,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   TextEditingController confirmPasswordController = TextEditingController();
+  UserService userService = new UserService();
   final loginFormKey = GlobalKey<FormState>();
 
   Widget buildUsernameField() {
@@ -157,7 +156,11 @@ class _RegisterScreenState extends State<RegisterScreen> {
             autovalidateMode: AutovalidateMode.onUserInteraction,
             obscureText: true,
             validator: (value) {
-              return value == "" ? 'Passwords do not march!' : null;
+              return value == ""
+                  ? 'Password can\'t be empty!'
+                  : value != this.passwordController.text
+                      ? 'Passwords do not march!'
+                      : null;
             },
             style: TextStyle(
               color: Colors.black,
@@ -213,6 +216,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
   }
 
   Widget buildRegisterBtn() {
+    bool validate;
     return Container(
       padding: EdgeInsets.symmetric(vertical: 25.0),
       width: double.infinity,
@@ -225,11 +229,15 @@ class _RegisterScreenState extends State<RegisterScreen> {
           ),
           primary: Color.fromARGB(255, 249, 187, 178),
         ),
-        onPressed: () => {
-          //TODO: REGISTER
-          loginFormKey.currentState.validate(),
-          Navigator.push(
-              context, MaterialPageRoute(builder: (context) => LoginScreen())),
+        onPressed: () async => {
+          validate = loginFormKey.currentState.validate(),
+          if (validate)
+            {
+              await _register(
+                  this.nameController.text,
+                  this.confirmPasswordController.text,
+                  this.emailController.text)
+            }
         },
         child: Text(
           'REGISTER',
@@ -243,6 +251,25 @@ class _RegisterScreenState extends State<RegisterScreen> {
         ),
       ),
     );
+  }
+
+  Future<dynamic> _register(
+      String username, String password, String email) async {
+    User user = new User(Username: username, Password: password, Email: email);
+
+    final result = await this.userService.registerUser(user);
+
+    if (result) {
+      ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text("The register was successful!")));
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => LoginScreen()),
+      );
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+          content: Text("There was something wrong with the authentication.")));
+    }
   }
 
   @override

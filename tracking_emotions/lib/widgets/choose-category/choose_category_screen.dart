@@ -1,36 +1,74 @@
 import 'package:flutter/material.dart';
 import 'package:chat_bubbles/chat_bubbles.dart';
-
-void main() {
-  runApp(ChooseCategory());
-}
+import 'package:tracking_emotions/models/emotion-category.dart';
+import 'package:tracking_emotions/utils/services/category-service.dart';
+import 'package:tracking_emotions/widgets/submit_emotion_record_page/submitEmotionRecordPage.dart';
 
 class ChooseCategory extends StatelessWidget {
+  int _valence;
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: ThemeData(primaryColor: Colors.orangeAccent),
-      home: HomePage(),
+      home: HomePage(this._valence),
     );
+  }
+
+  ChooseCategory(int valence) {
+    this._valence = valence;
   }
 }
 
 class HomePage extends StatefulWidget {
+  int _valence;
+  HomePage(int valence) {
+    this._valence = valence;
+  }
+
   @override
-  _HomePageState createState() => _HomePageState();
+  _HomePageState createState() => _HomePageState(this._valence);
 }
 
 class _HomePageState extends State<HomePage> {
-  List<DropdownMenuItem<String>> get dropdownItems {
-    List<DropdownMenuItem<String>> menuItems = [
-      DropdownMenuItem(child: Text("Extra pozitiv"), value: "ExtraPozitiv"),
-      DropdownMenuItem(child: Text("Putin Pozitiv"), value: "PutinPozitiv"),
-      DropdownMenuItem(child: Text("Mai Mult Neutru"), value: "MaiMultNeutru"),
-    ];
+  int _valence;
+
+  _HomePageState(int valence) {
+    this._valence = valence;
+  }
+
+  CategoryService _categoryService = new CategoryService();
+
+  List<DropdownMenuItem<String>> menuItems;
+
+  Future<List<DropdownMenuItem<String>>> getDropdownItems() async {
+    List<DropdownMenuItem<String>> menuItems = [];
+    List<EmotionCategory> emotionCategoryList =
+        await this._categoryService.getCategory(this._valence);
+
+    emotionCategoryList.forEach((emotionCategory) {
+      menuItems.add(DropdownMenuItem(
+          child: Text(emotionCategory.Name),
+          value: emotionCategory.EmotionCategoryID.toString()));
+    });
     return menuItems;
   }
 
-  String selectedValue = "ExtraPozitiv";
+  String selectedValue = "";
+
+  setMenuItems() async {
+    var backendMenuItems = await getDropdownItems();
+    this.setState(() {
+      menuItems = backendMenuItems;
+      selectedValue = menuItems.first.value;
+    });
+  }
+
+  @override
+  void initState() {
+    setMenuItems();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -105,7 +143,7 @@ class _HomePageState extends State<HomePage> {
                             });
                           },
                           value: selectedValue,
-                          items: dropdownItems),
+                          items: menuItems),
                     ),
                     new Container(
                       width: 350,
@@ -117,8 +155,8 @@ class _HomePageState extends State<HomePage> {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => ChooseCategory()));
-                          //:TODO Send to next screen
+                                  builder: (context) =>
+                                      SubmitEmotionRecordPage()));
                         },
                         child: Text(
                           "Mai departe",

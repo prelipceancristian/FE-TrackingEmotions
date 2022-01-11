@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:tracking_emotions/utils/constants.dart';
 import 'package:tracking_emotions/utils/services/authentication-services/authentication-controller.dart';
 import 'package:tracking_emotions/widgets/homepage/MyStatefulWidget.dart';
+import 'package:tracking_emotions/widgets/register_page/register_page.dart';
 
 class LoginScreen extends StatefulWidget {
   @override
@@ -92,6 +93,7 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
   Widget buildLoginBtn() {
+    bool validate;
     return Container(
       padding: EdgeInsets.symmetric(vertical: 25.0),
       width: double.infinity,
@@ -104,11 +106,13 @@ class _LoginScreenState extends State<LoginScreen> {
           ),
           primary: Color.fromARGB(255, 128, 89, 89),
         ),
-        onPressed: () => {
-          //TODO: add login functionality
-          _loginFormKey.currentState.validate(),
-          Navigator.push(context,
-              MaterialPageRoute(builder: (context) => MyStatefulWidget())),
+        onPressed: () async => {
+          validate = _loginFormKey.currentState.validate(),
+          if (validate)
+            {
+              await _connectWithDefaultAuthentication(
+                  this._usernameController.text, this._passwordController.text)
+            }
         },
         child: Text(
           'LOGIN',
@@ -127,7 +131,10 @@ class _LoginScreenState extends State<LoginScreen> {
   Widget buildSignupBtn() {
     return GestureDetector(
       onTap: () => {
-        // TODO: add a route to register page
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (context) => RegisterPage()),
+        )
       },
       child: RichText(
         text: TextSpan(
@@ -222,23 +229,44 @@ class _LoginScreenState extends State<LoginScreen> {
 
   Future<dynamic> _connectWithGoogle() async {
     _authenticationController.initializeGoogleAuthentication();
-    final result = await _authenticationController.login();
+    final result = await _authenticationController.login('', '');
     if (result) {
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(builder: (context) => MyStatefulWidget()),
       );
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+          content: Text("There was something wrong with the authentication.")));
     }
   }
 
   Future<dynamic> _connectWithFacebook() async {
     _authenticationController.initializeFacebookAuthentication();
-    final result = await _authenticationController.login();
+    final result = await _authenticationController.login('', '');
     if (result) {
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(builder: (context) => MyStatefulWidget()),
       );
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+          content: Text("There was something wrong with the authentication.")));
+    }
+  }
+
+  Future<dynamic> _connectWithDefaultAuthentication(
+      String username, String password) async {
+    _authenticationController.initializeDefaultAuthentication();
+    final result = await _authenticationController.login(username, password);
+    if (result) {
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => MyStatefulWidget()),
+      );
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+          content: Text("These credentials do not match our records.")));
     }
   }
 

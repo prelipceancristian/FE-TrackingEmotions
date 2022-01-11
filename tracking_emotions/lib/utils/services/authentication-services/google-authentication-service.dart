@@ -1,8 +1,12 @@
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:tracking_emotions/models/user.dart';
 import 'package:tracking_emotions/utils/services/authentication-services/authentication-service-interface.dart';
+
+import '../user-service.dart';
 
 class GoogleAuthenticationService implements AuthenticationServiceInterface {
   GoogleSignInAccount _googleAccount;
+  UserService _userService = new UserService();
 
   static final GoogleAuthenticationService _googleAuthenticationService =
       GoogleAuthenticationService.internal();
@@ -31,13 +35,20 @@ class GoogleAuthenticationService implements AuthenticationServiceInterface {
   }
 
   @override
-  Future<bool> login() async {
+  Future<bool> login(String username, String password) async {
     final googleAccount = await GoogleSignIn().signIn();
 
     if (googleAccount != null) {
-      this._googleAccount = googleAccount;
-      print(googleAccount.toString());
-      return true;
+      User user = new User(
+          UserId: googleAccount.id,
+          FirstName: googleAccount.displayName,
+          Email: googleAccount.email);
+
+      bool result = await this._userService.socialLogin(user);
+      if (result) {
+        this._googleAccount = googleAccount;
+        return true;
+      }
     }
 
     return false;
