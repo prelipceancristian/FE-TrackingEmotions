@@ -29,18 +29,18 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  AuthenticationController authenticationController =
-      new AuthenticationController();
+  AuthenticationController authenticationController = new AuthenticationController();
 
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<bool>(
-        future: authenticationController.isSignedIn(),
-        builder: (BuildContext context, AsyncSnapshot<bool> isSignedIn) {
-          if (isSignedIn.hasData && isSignedIn.data == true) {
-            return MyStatefulWidget();
-          }
-          return LoginScreen();
-        });
+      future: authenticationController.isSignedIn(),
+      builder: (BuildContext context, AsyncSnapshot<bool> isSignedIn) {
+        if (isSignedIn.hasData && isSignedIn.data == true) {
+          return MyStatefulWidget();
+        }
+        return LoginScreen();
+      },
+    );
   }
 }

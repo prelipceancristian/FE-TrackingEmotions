@@ -253,7 +253,5 @@ packages:
     source: hosted
     version: "2.1.1"
 sdks:
-  chat_bubbles: ">=1.1.0 <2.0.0"
   dart: ">=2.14.0 <3.0.0"
-  dependencies: any
   flutter: ">=2.5.0"
