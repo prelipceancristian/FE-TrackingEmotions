@@ -12,17 +12,33 @@ class EmotionsReportPage extends StatefulWidget {
 
 class _EmotionsReportPageState extends State<EmotionsReportPage> {
   final emotions = [
-    EmotionCard(heading: 'Wonderful', subheading: 'Family', supportingText: 'At home', time: 'time'),
-    EmotionCard(heading: 'Saddness', subheading: 'Job', supportingText: 'At office', time: 'time'),
-    EmotionCard(heading: 'test', subheading: 'test', supportingText: 'test', time: 'time'),
-    EmotionCard(heading: 'asalut', subheading: 'ae bun', supportingText: 'ba', time: 'time'),
+    EmotionCard(
+        heading: 'Wonderful',
+        subheading: 'Family',
+        supportingText: 'At home',
+        time: 'time'),
+    EmotionCard(
+        heading: 'Saddness',
+        subheading: 'Job',
+        supportingText: 'At office',
+        time: 'time'),
+    EmotionCard(
+        heading: 'test',
+        subheading: 'test',
+        supportingText: 'test',
+        time: 'time'),
+    EmotionCard(
+        heading: 'asalut',
+        subheading: 'ae bun',
+        supportingText: 'ba',
+        time: 'time'),
   ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.purple.shade200,
+        backgroundColor: Colors.red[300],
         title: Text(widget.title),
         actions: [
           IconButton(
@@ -33,6 +49,10 @@ class _EmotionsReportPageState extends State<EmotionsReportPage> {
                 context: context,
                 builder: (context) {
                   return Dialog(
+                    backgroundColor: Color.fromARGB(255, 249, 187, 178),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10.0),
+                    ),
                     child: Padding(
                       padding: const EdgeInsets.all(24.0),
                       child: Column(
@@ -53,7 +73,8 @@ class _EmotionsReportPageState extends State<EmotionsReportPage> {
                                 color: Colors.black,
                               ),
                             ),
-                            onPressed: () => Navigator.of(context).pop('emotion'),
+                            onPressed: () =>
+                                Navigator.of(context).pop('emotion'),
                           ),
                           TextButton(
                             child: Text(
@@ -63,7 +84,8 @@ class _EmotionsReportPageState extends State<EmotionsReportPage> {
                                 color: Colors.black,
                               ),
                             ),
-                            onPressed: () => Navigator.of(context).pop('location'),
+                            onPressed: () =>
+                                Navigator.of(context).pop('location'),
                           ),
                           TextButton(
                             child: Text(
@@ -83,11 +105,15 @@ class _EmotionsReportPageState extends State<EmotionsReportPage> {
               );
 
               if (option == 'emotion') {
-                emotions.sort((a, b) => a.heading.toLowerCase().compareTo(b.heading.toLowerCase()));
+                emotions.sort((a, b) =>
+                    a.heading.toLowerCase().compareTo(b.heading.toLowerCase()));
               } else if (option == 'location') {
-                emotions.sort((a, b) => a.supportingText.toLowerCase().compareTo(b.supportingText.toLowerCase()));
+                emotions.sort((a, b) => a.supportingText
+                    .toLowerCase()
+                    .compareTo(b.supportingText.toLowerCase()));
               } else if (option == 'date') {
-                emotions.sort((a, b) => DateTime.tryParse(b.time).compareTo(DateTime.tryParse(a.time)));
+                emotions.sort((a, b) => DateTime.tryParse(b.time)
+                    .compareTo(DateTime.tryParse(a.time)));
               }
               if (option != null) {
                 setState(() {});
@@ -98,7 +124,7 @@ class _EmotionsReportPageState extends State<EmotionsReportPage> {
       ),
       body: Container(
         decoration: BoxDecoration(
-          color: Color.fromARGB(255, 250, 237, 227),
+          color: Colors.white,
         ),
         padding: const EdgeInsets.all(18.0),
         child: ListView.builder(

@@ -33,7 +33,7 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.red[100],
+      backgroundColor: Color.fromARGB(255, 250, 237, 227),
       body: Container(
         child: Stack(
           children: <Widget>[
@@ -73,7 +73,7 @@ class _HomePageState extends State<HomePage> {
                 height: 310,
                 margin: EdgeInsets.only(top: 300),
                 decoration:
-                    BoxDecoration(color: Color.fromRGBO(156, 80, 82, 1)),
+                    BoxDecoration(color: Color.fromARGB(255, 249, 187, 178)),
                 child: Column(
                   children: <Widget>[
                     new Container(
@@ -95,13 +95,13 @@ class _HomePageState extends State<HomePage> {
                         style: ButtonStyle(
                           padding: MaterialStateProperty.all<EdgeInsets>(
                               EdgeInsets.all(15)),
-                          backgroundColor:
-                              MaterialStateProperty.all(Colors.white),
+                          backgroundColor: MaterialStateProperty.all(
+                              Colors.red[300].withOpacity(0.7)),
                           shape:
                               MaterialStateProperty.all<RoundedRectangleBorder>(
                             RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(18.0),
-                              side: BorderSide(color: Colors.white),
+                              side: BorderSide(color: Colors.red[400]),
                             ),
                           ),
                         ),
@@ -127,13 +127,13 @@ class _HomePageState extends State<HomePage> {
                         style: ButtonStyle(
                           padding: MaterialStateProperty.all<EdgeInsets>(
                               EdgeInsets.all(15)),
-                          backgroundColor:
-                              MaterialStateProperty.all(Colors.white),
+                          backgroundColor: MaterialStateProperty.all(
+                              Colors.red[300].withOpacity(0.7)),
                           shape:
                               MaterialStateProperty.all<RoundedRectangleBorder>(
                             RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(18.0),
-                              side: BorderSide(color: Colors.white),
+                              side: BorderSide(color: Colors.red[400]),
                             ),
                           ),
                         ),
@@ -159,13 +159,13 @@ class _HomePageState extends State<HomePage> {
                         style: ButtonStyle(
                           padding: MaterialStateProperty.all<EdgeInsets>(
                               EdgeInsets.all(15)),
-                          backgroundColor:
-                              MaterialStateProperty.all(Colors.white),
+                          backgroundColor: MaterialStateProperty.all(
+                              Colors.red[300].withOpacity(0.7)),
                           shape:
                               MaterialStateProperty.all<RoundedRectangleBorder>(
                             RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(18.0),
-                              side: BorderSide(color: Colors.white),
+                              side: BorderSide(color: Colors.red[400]),
                             ),
                           ),
                         ),
@@ -189,13 +189,13 @@ class _HomePageState extends State<HomePage> {
                           padding: MaterialStateProperty.all<EdgeInsets>(
                               EdgeInsets.only(
                                   left: 15, right: 15, top: 10, bottom: 10)),
-                          backgroundColor:
-                              MaterialStateProperty.all(Colors.brown[1000]),
+                          backgroundColor: MaterialStateProperty.all(
+                              Colors.brown[300].withOpacity(0.7)),
                           shape:
                               MaterialStateProperty.all<RoundedRectangleBorder>(
                             RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(18.0),
-                              side: BorderSide(color: Colors.black),
+                              side: BorderSide(color: Colors.brown[400]),
                             ),
                           ),
                         ),

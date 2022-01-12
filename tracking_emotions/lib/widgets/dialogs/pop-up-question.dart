@@ -9,7 +9,8 @@ class PopUpQuestion extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      theme: new ThemeData(scaffoldBackgroundColor: const Color(0xFFF8BBD0)),
+      theme: new ThemeData(
+          scaffoldBackgroundColor: Color.fromARGB(255, 250, 237, 227)),
       home: Scaffold(
         body: Center(
           child: MyStatelessWidget(),
@@ -24,6 +25,7 @@ class MyStatelessWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
+      backgroundColor: Color.fromARGB(255, 249, 187, 178),
       title: Align(
         child: const Text(
           'Can you identify your emotions?',
@@ -40,8 +42,16 @@ class MyStatelessWidget extends StatelessWidget {
                 MaterialPageRoute(builder: (context) => ChooseEmotionType()));
           },
           style: ButtonStyle(
-              padding: MaterialStateProperty.all<EdgeInsets>(EdgeInsets.all(8)),
-              backgroundColor: MaterialStateProperty.all<Color>(Colors.brown)),
+            padding: MaterialStateProperty.all<EdgeInsets>(EdgeInsets.all(8)),
+            backgroundColor: MaterialStateProperty.all<Color>(
+                Colors.red[300].withOpacity(0.7)),
+            shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+              RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(18.0),
+                side: BorderSide(color: Colors.red[400]),
+              ),
+            ),
+          ),
           child: Align(
             child: Text(
               'I can not!',
@@ -55,10 +65,16 @@ class MyStatelessWidget extends StatelessWidget {
         ),
         ElevatedButton(
             style: ButtonStyle(
-                padding:
-                    MaterialStateProperty.all<EdgeInsets>(EdgeInsets.all(8)),
-                backgroundColor:
-                    MaterialStateProperty.all<Color>(Colors.brown)),
+              padding: MaterialStateProperty.all<EdgeInsets>(EdgeInsets.all(8)),
+              backgroundColor: MaterialStateProperty.all<Color>(
+                  Colors.red[300].withOpacity(0.7)),
+              shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(18.0),
+                  side: BorderSide(color: Colors.red[400]),
+                ),
+              ),
+            ),
             onPressed: () {
               Navigator.push(
                   context,
