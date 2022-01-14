@@ -23,7 +23,7 @@ class CongratulationsPage extends StatelessWidget {
           ],
         ),
       ),
-      backgroundColor: Colors.red[100],
+      backgroundColor: Color.fromARGB(255, 250, 237, 227),
       floatingActionButton: FloatingActionButton(
         backgroundColor: Colors.red[300],
         child: Icon(Icons.arrow_forward_ios),

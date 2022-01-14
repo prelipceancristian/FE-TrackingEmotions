@@ -22,7 +22,7 @@ class HomeScreen extends StatelessWidget {
                   Container(
                     margin: EdgeInsets.only(
                         top:
-                            220), //𝘏𝘰𝘸 𝘢𝘳𝘦 𝘺𝘰𝘶 𝘧𝘦𝘦𝘭𝘪𝘯𝘨 𝘵𝘰𝘥𝘢𝘺?
+                            280), //𝘏𝘰𝘸 𝘢𝘳𝘦 𝘺𝘰𝘶 𝘧𝘦𝘦𝘭𝘪𝘯𝘨 𝘵𝘰𝘥𝘢𝘺?
                     child: Card(
                         color:
                             Color.fromARGB(255, 249, 187, 178).withOpacity(0.3),

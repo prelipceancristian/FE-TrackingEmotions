@@ -27,26 +27,26 @@ class _HomePageState extends State<HomePage> {
   final List<Map<String, dynamic>> _allUsers = [
     {
       "id": 1,
-      "name": "Fericire",
+      "name": "Happiness",
       "description":
-          "Fericirea este o stare mentală de bine, fiind caracterizată de emoţii pozitive sau plăcute, de la mulţumire la bucurie intensă.",
+          "Happiness is an emotional state characterized by feelings of joy, satisfaction, contentment, and fulfillment.",
     },
     {
       "id": 2,
-      "name": "Ușurare",
-      "description": "Te simți eliberat de sub apăsarea unui lucru greu.",
+      "name": "Released",
+      "description":
+          "A feeling of reassurance and relaxation following release from anxiety or distress caused by a difficult situation.",
     },
     {
       "id": 3,
-      "name": "Mulțumire",
+      "name": "Grateful",
       "description":
-          "Sfaturi: Cultiva-ti vorbirea intr-o voce calda, joasa. Nu lasa niciodata sa treaca o ocazie fara sa incurajezi pe cineva sau sa spui ceva frumos cuiva.",
+          "Advice: Lower your voice and keep it calm. Don't miss the chance of encouraging someone or say something nice about someone.",
     },
     {
       "id": 4,
-      "name": "Binecuvântare",
-      "description":
-          "Fă o listă de lucruri și oameni pentru care ești recunoscător în viața ta.",
+      "name": "Blessed",
+      "description": "Make a list of all the people you are thankful for.",
     },
     {
       "id": 5,
