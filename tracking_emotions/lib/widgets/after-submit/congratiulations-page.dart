@@ -12,7 +12,7 @@ class CongratulationsPage extends StatelessWidget {
             Container(
               margin: EdgeInsets.only(top: 350),
               child: Text(
-                'Congratulations! \n You have logged your first emotion!',
+                'Congratulations! \n You have logged your emotion!',
                 style: TextStyle(
                     fontSize: 35,
                     fontWeight: FontWeight.bold,
