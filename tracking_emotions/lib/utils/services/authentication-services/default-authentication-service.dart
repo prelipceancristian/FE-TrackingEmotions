@@ -60,7 +60,7 @@ class DefaultAuthenticationService implements AuthenticationServiceInterface {
 
   @override
   String getName() {
-    return this._userData.Username;
+    return this._userData.FirstName;
   }
 
   @override
