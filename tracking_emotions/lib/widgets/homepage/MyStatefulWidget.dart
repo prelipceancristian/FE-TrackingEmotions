@@ -5,7 +5,7 @@ import 'package:tracking_emotions/widgets/emotions_report_page/emotions_report_p
 import 'HomeScreen.dart';
 
 class MyStatefulWidget extends StatefulWidget {
-  //MyStatefulWidget({Key? key}) : super(key: key);
+  const MyStatefulWidget({Key key}) : super(key: key);
 
   @override
   _MyStatefulWidgetState createState() => _MyStatefulWidgetState();

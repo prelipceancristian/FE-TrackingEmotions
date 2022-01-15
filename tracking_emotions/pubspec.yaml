@@ -20,8 +20,6 @@ version: 1.0.0+1
 environment:
   sdk: ">=2.7.0 <3.0.0"
 
-  dependencies:
-  chat_bubbles: ^1.1.0
 dependencies:
 
   flutter:
@@ -56,6 +54,10 @@ flutter:
     - assets/icons/facebook.jpg
     - assets/icons/google.jpg
     - assets/icons/user_page.jpg
+    - assets/icons/coffee.jpg
+    - assets/icons/cardPatrick.jpg
+    - assets/icons/card2.jpg
+    - assets/icons/cardBun.jpg
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

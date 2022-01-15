@@ -1,68 +1,137 @@
 import 'package:flutter/material.dart';
 import 'package:tracking_emotions/widgets/emotions_report_page/emotion_card.dart';
 
-class EmotionsReportPage extends StatelessWidget {
-  const EmotionsReportPage({Key key}) : super(key: key);
+class EmotionsReportPage extends StatefulWidget {
+  const EmotionsReportPage({Key key, String title}) : super(key: key);
+
+  final String title = 'Your tracked emotions';
 
   @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      theme: ThemeData(
-        // Define the default brightness and colors.
-        brightness: Brightness.light,
-        primaryColor: Colors.pink.shade100,
-        fontFamily: 'Georgia',
-        textTheme: const TextTheme(
-          headline1: TextStyle(fontSize: 36.0, fontWeight: FontWeight.bold),
-          headline6: TextStyle(fontSize: 29.0, fontStyle: FontStyle.italic),
-          bodyText2: TextStyle(fontSize: 14.0, fontFamily: 'Hind'),
-        ),
-      ),
-      debugShowCheckedModeBanner: false,
-      home: const MyHomePage(title: 'Your tracked emotions'),
-    );
-  }
+  State<EmotionsReportPage> createState() => _EmotionsReportPageState();
 }
 
-class MyHomePage extends StatefulWidget {
-  final String title;
-
-  // ignore: use_key_in_widget_constructors
-  const MyHomePage({this.title = 'Demo'});
-
-  @override
-  _MyHomePageState createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  // var i = 0;
-  static const emotions = [
-    ["Wonderful", "Family", "At home", "time"],
-    ["Sadness", "Job", "At office", "time"],
-    ["Excitement", "Colleagues", "At home", "time"],
-    ["test", "test", "test", "time"]
+class _EmotionsReportPageState extends State<EmotionsReportPage> {
+  final emotions = [
+    EmotionCard(
+        heading: 'Wonderful',
+        subheading: 'Family',
+        supportingText: 'At home',
+        time: 'time'),
+    EmotionCard(
+        heading: 'Saddness',
+        subheading: 'Job',
+        supportingText: 'At office',
+        time: 'time'),
+    EmotionCard(
+        heading: 'test',
+        subheading: 'test',
+        supportingText: 'test',
+        time: 'time'),
+    EmotionCard(
+        heading: 'asalut',
+        subheading: 'ae bun',
+        supportingText: 'ba',
+        time: 'time'),
   ];
+
   @override
   Widget build(BuildContext context) {
-    // ignore: prefer_typing_uninitialized_variables
-
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.purple.shade200,
+        backgroundColor: Colors.red[300],
         title: Text(widget.title),
+        actions: [
+          IconButton(
+            icon: Icon(Icons.sort),
+            onPressed: () async {
+              final option = await showDialog<String>(
+                useSafeArea: true,
+                context: context,
+                builder: (context) {
+                  return Dialog(
+                    backgroundColor: Color.fromARGB(255, 249, 187, 178),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10.0),
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.all(24.0),
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Text(
+                            'Sort by:',
+                            style: TextStyle(
+                              fontSize: 24.0,
+                            ),
+                          ),
+                          const SizedBox(height: 24.0),
+                          TextButton(
+                            child: Text(
+                              'Emotion',
+                              style: TextStyle(
+                                fontSize: 16.0,
+                                color: Colors.black,
+                              ),
+                            ),
+                            onPressed: () =>
+                                Navigator.of(context).pop('emotion'),
+                          ),
+                          TextButton(
+                            child: Text(
+                              'Location',
+                              style: TextStyle(
+                                fontSize: 16.0,
+                                color: Colors.black,
+                              ),
+                            ),
+                            onPressed: () =>
+                                Navigator.of(context).pop('location'),
+                          ),
+                          TextButton(
+                            child: Text(
+                              'Date',
+                              style: TextStyle(
+                                fontSize: 16.0,
+                                color: Colors.black,
+                              ),
+                            ),
+                            onPressed: () => Navigator.of(context).pop('date'),
+                          ),
+                        ],
+                      ),
+                    ),
+                  );
+                },
+              );
+
+              if (option == 'emotion') {
+                emotions.sort((a, b) =>
+                    a.heading.toLowerCase().compareTo(b.heading.toLowerCase()));
+              } else if (option == 'location') {
+                emotions.sort((a, b) => a.supportingText
+                    .toLowerCase()
+                    .compareTo(b.supportingText.toLowerCase()));
+              } else if (option == 'date') {
+                emotions.sort((a, b) => DateTime.tryParse(b.time)
+                    .compareTo(DateTime.tryParse(a.time)));
+              }
+              if (option != null) {
+                setState(() {});
+              }
+            },
+          ),
+        ],
       ),
       body: Container(
-          decoration: BoxDecoration(color: Color.fromARGB(255, 250, 237, 227)),
-          padding: const EdgeInsets.all(18.0),
-          child: ListView.builder(
-              itemCount: emotions.length,
-              itemBuilder: (BuildContext context, int index) {
-                return EmotionCard(
-                    heading: emotions[index][0],
-                    subheading: emotions[index][1],
-                    supportingText: emotions[index][2]);
-              })),
-      // )
+        decoration: BoxDecoration(
+          color: Color.fromARGB(255, 250, 237, 227),
+        ),
+        padding: const EdgeInsets.all(18.0),
+        child: ListView.builder(
+          itemCount: emotions.length,
+          itemBuilder: (BuildContext context, int index) => emotions[index],
+        ),
+      ),
     );
   }
 }

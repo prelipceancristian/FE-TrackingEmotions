@@ -73,7 +73,7 @@ class _SubmitEmotionRecordPageState extends State<SubmitEmotionRecordPage> {
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: ThemeData(
-        scaffoldBackgroundColor: const Color(0xffffd1d1),
+        scaffoldBackgroundColor: Color.fromARGB(255, 250, 237, 227),
       ),
       home: Scaffold(
         body: Column(
@@ -100,11 +100,12 @@ class _SubmitEmotionRecordPageState extends State<SubmitEmotionRecordPage> {
                   style: TextStyle(fontSize: 28),
                 ),
                 style: ButtonStyle(
+                
                   backgroundColor: MaterialStateProperty.resolveWith<Color>(
                     (Set<MaterialState> states) {
                       if (states.contains(MaterialState.pressed))
-                        return Colors.black.withOpacity(1);
-                      return Colors.black.withOpacity(0.5);
+                        return Colors.red[200].withOpacity(0.5);
+                      return Colors.red[200];
                     },
                   ),
                   shape: MaterialStateProperty.all<RoundedRectangleBorder>(
