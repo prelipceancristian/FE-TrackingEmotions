@@ -156,7 +156,8 @@ class _HomePageState extends State<HomePage> {
                               context,
                               MaterialPageRoute(
                                   builder: (context) =>
-                                      SubmitEmotionRecordPage()));
+                                      SubmitEmotionRecordPage.fromCategory(
+                                          selectedValue)));
                         },
                         child: Text(
                           "Mai departe",

@@ -10,12 +10,23 @@ import './selector.dart';
 import 'submitEmotionRecordPageText.dart';
 
 class SubmitEmotionRecordPage extends StatefulWidget {
+  String _categoryId;
+
+  SubmitEmotionRecordPage() {
+    this._categoryId = "-1";
+  }
+
+  SubmitEmotionRecordPage.fromCategory(String _categoryId) {
+    this._categoryId = _categoryId;
+  }
   @override
   _SubmitEmotionRecordPageState createState() =>
-      _SubmitEmotionRecordPageState();
+      _SubmitEmotionRecordPageState.fromCategory(_categoryId);
 }
 
 class _SubmitEmotionRecordPageState extends State<SubmitEmotionRecordPage> {
+  String _categoryId;
+
   Selector emotionSelector;
   Selector locationsSelector;
   Selector peopleSelector;
@@ -31,7 +42,18 @@ class _SubmitEmotionRecordPageState extends State<SubmitEmotionRecordPage> {
   EmotionService _emotionService;
   SocialEnvironmentService _socialEnvironmentService;
 
+  _SubmitEmotionRecordPageState.fromCategory(String categoryId) {
+    this._categoryId = categoryId;
+    this.selectedEmotion = "";
+    this.selectedLocation = "";
+    this.selectedPersonId = "";
+    _emotionService = new EmotionService();
+    _socialEnvironmentService = new SocialEnvironmentService();
+  }
+
   _SubmitEmotionRecordPageState() {
+    //this might not be necessary
+    this._categoryId = "-1";
     this.selectedEmotion = "";
     this.selectedLocation = "";
     this.selectedPersonId = "";
@@ -52,8 +74,9 @@ class _SubmitEmotionRecordPageState extends State<SubmitEmotionRecordPage> {
   }
 
   Future<int> getItems() async {
+    print(_categoryId);
     var backendEmotions = await _emotionService.getEmotionsForCategory(
-        "-1"); //TODO: change this to the emotion category once here
+        _categoryId); //TODO: change this to the emotion category once here
     var backendLocations =
         await _socialEnvironmentService.getSocialEnvironmentsByType(true);
     var backendPeople =
@@ -90,7 +113,7 @@ class _SubmitEmotionRecordPageState extends State<SubmitEmotionRecordPage> {
   Widget build(BuildContext context) {
     return FutureBuilder(
         future: _emotionService.getEmotionsForCategory(
-            "-1"), //TODO: change this category and improve the future
+            _categoryId), //TODO: change this category and improve the future
         builder: (context, snapshot) {
           return MaterialApp(
             theme: ThemeData(
