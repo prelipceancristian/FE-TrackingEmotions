@@ -53,6 +53,7 @@ flutter:
   assets:
     - assets/icons/facebook.jpg
     - assets/icons/google.jpg
+    - assets/icons/user_page.jpg
     - assets/icons/coffee.jpg
     - assets/icons/cardPatrick.jpg
     - assets/icons/card2.jpg
