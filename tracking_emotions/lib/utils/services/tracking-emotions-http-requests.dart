@@ -20,6 +20,7 @@ class TrackingEmotionsHttpRequests {
       formattedUrl += key.toString() + '=' + value.toString();
       index += 1;
     });
+    print(formattedUrl);
     return await http.get(Uri.parse(formattedUrl));
   }
 

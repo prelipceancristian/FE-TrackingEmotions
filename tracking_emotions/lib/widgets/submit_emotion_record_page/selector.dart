@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class Selector extends StatefulWidget {
-  final List<String> values;
+  final Map<String, String> values;
   final String prefixIconType;
   final Function(String) callBack;
 
@@ -13,10 +13,10 @@ class Selector extends StatefulWidget {
 
 class _SelectorState extends State<Selector> {
   String dropdownValue;
-  List<String> values;
+  Map<String, String> values;
   String prefixIconType;
 
-  _SelectorState(List<String> values, String prefixIconType) {
+  _SelectorState(Map<String, String> values, String prefixIconType) {
     this.values = values;
     this.prefixIconType = prefixIconType;
   }
@@ -47,15 +47,16 @@ class _SelectorState extends State<Selector> {
             ),
           ),
           onChanged: (String newValue) {
+            print(newValue);
             setState(() {
               widget.callBack(newValue);
               dropdownValue = newValue;
             });
           },
-          items: values.map((String value) {
+          items: values.entries.map((MapEntry<String, String> el) {
             return DropdownMenuItem<String>(
-              value: value,
-              child: Text(value),
+              value: el.key,
+              child: Text(el.value),
             );
           }).toList(),
         ),
