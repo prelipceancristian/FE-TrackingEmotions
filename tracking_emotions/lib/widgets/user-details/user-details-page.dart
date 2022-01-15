@@ -77,34 +77,35 @@ class UserDetailsPage extends StatelessWidget {
           SizedBox(
             height: 20.0,
           ),
-          Container(
-              width: 300.00,
-              margin: const EdgeInsets.only(top: 150.0),
+          Align(
+              alignment: Alignment.bottomCenter,
               child: Container(
-                padding: EdgeInsets.symmetric(vertical: 25.0),
-                width: double.infinity,
-                child: TextButton(
-                  style: ElevatedButton.styleFrom(
-                    elevation: 5.0,
-                    padding: EdgeInsets.all(15.0),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(30.0),
+                  width: 300.00,
+                  child: Container(
+                    padding: EdgeInsets.symmetric(vertical: 25.0),
+                    width: double.infinity,
+                    child: TextButton(
+                      style: ElevatedButton.styleFrom(
+                        elevation: 5.0,
+                        padding: EdgeInsets.all(15.0),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(30.0),
+                        ),
+                        primary: Color.fromARGB(255, 128, 89, 89),
+                      ),
+                      onPressed: () async => {this._logOut(context)},
+                      child: Text(
+                        'LOG OUT',
+                        style: TextStyle(
+                          color: Colors.white,
+                          letterSpacing: 1.5,
+                          fontSize: 18.0,
+                          fontWeight: FontWeight.bold,
+                          fontFamily: 'OpenSans',
+                        ),
+                      ),
                     ),
-                    primary: Color.fromARGB(255, 128, 89, 89),
-                  ),
-                  onPressed: () async => {this._logOut(context)},
-                  child: Text(
-                    'LOG OUT',
-                    style: TextStyle(
-                      color: Colors.white,
-                      letterSpacing: 1.5,
-                      fontSize: 18.0,
-                      fontWeight: FontWeight.bold,
-                      fontFamily: 'OpenSans',
-                    ),
-                  ),
-                ),
-              )),
+                  ))),
         ],
       ),
     );
