@@ -40,7 +40,7 @@ class _HomePageState extends State<HomePage> {
         "name": emotion.Name,
         "description": emotion.DescriptionText,
         "descriptionId": emotion.DescriptionId
-        //TO DO: must bring the text Description here!!
+        //TODO: must bring the text Description here!!
       });
     });
     return menuItems;

@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:tracking_emotions/widgets/dialogs/pop-up-question.dart';
+import 'package:tracking_emotions/widgets/user-details/user-details-page.dart';
 
 class HomeScreen extends StatelessWidget {
   @override

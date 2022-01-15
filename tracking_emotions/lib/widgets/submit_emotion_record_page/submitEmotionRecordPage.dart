@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:tracking_emotions/models/emotion-log.dart';
 import 'package:tracking_emotions/models/emotion.dart';
 import 'package:tracking_emotions/models/social-environment.dart';
 import 'package:tracking_emotions/utils/services/Emotion-service.dart';
+import 'package:tracking_emotions/utils/services/authentication-services/authentication-controller.dart';
+import 'package:tracking_emotions/utils/services/emotion-log-service.dart';
 import 'package:tracking_emotions/utils/services/social-environment-service.dart';
 
 import 'package:tracking_emotions/widgets/after-submit/congratiulations-page.dart';
@@ -41,6 +44,8 @@ class _SubmitEmotionRecordPageState extends State<SubmitEmotionRecordPage> {
 
   EmotionService _emotionService;
   SocialEnvironmentService _socialEnvironmentService;
+  EmotionLogService _emotionLogService;
+  AuthenticationController _authenticationController;
 
   _SubmitEmotionRecordPageState.fromCategory(String categoryId) {
     this._categoryId = categoryId;
@@ -49,6 +54,8 @@ class _SubmitEmotionRecordPageState extends State<SubmitEmotionRecordPage> {
     this.selectedPersonId = "";
     _emotionService = new EmotionService();
     _socialEnvironmentService = new SocialEnvironmentService();
+    _emotionLogService = new EmotionLogService();
+    _authenticationController = new AuthenticationController();
   }
 
   _SubmitEmotionRecordPageState() {
@@ -59,6 +66,8 @@ class _SubmitEmotionRecordPageState extends State<SubmitEmotionRecordPage> {
     this.selectedPersonId = "";
     _emotionService = new EmotionService();
     _socialEnvironmentService = new SocialEnvironmentService();
+    _emotionLogService = new EmotionLogService();
+    _authenticationController = new AuthenticationController();
   }
 
   void getDropDownEmotion(String text) {
@@ -142,7 +151,7 @@ class _SubmitEmotionRecordPageState extends State<SubmitEmotionRecordPage> {
                         peopleSelector,
                         Container(
                           child: ElevatedButton(
-                            onPressed: onPressed,
+                            onPressed: submitEmotionLog,
                             child: const Text(
                               'Submit',
                               style: TextStyle(fontSize: 28),
@@ -209,5 +218,20 @@ class _SubmitEmotionRecordPageState extends State<SubmitEmotionRecordPage> {
       // print(socialEnvironmentList[index].Relation);
     }
     return socialEnvironmentMap;
+  }
+
+  void submitEmotionLog() async {
+    EmotionLog emotionLog = new EmotionLog(
+        UserID: int.parse(_authenticationController.getAccountId()),
+        EmotionLogID: -1,
+        EmotionID: int.parse(this.selectedEmotion),
+        SocialEnvironmentID1: int.parse(this.selectedLocation),
+        SocialEnvironmentID2: int.parse(this.selectedPersonId),
+        Date: DateTime.now());
+    bool result = await _emotionLogService.submitEmotionLog(emotionLog);
+    if (result) {
+      Navigator.push(context,
+          MaterialPageRoute(builder: (context) => CongratulationsPage()));
+    }
   }
 }
