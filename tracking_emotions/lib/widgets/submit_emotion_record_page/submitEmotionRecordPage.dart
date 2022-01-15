@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:tracking_emotions/models/emotion.dart';
+import 'package:tracking_emotions/models/social-environment.dart';
 import 'package:tracking_emotions/utils/services/Emotion-service.dart';
+import 'package:tracking_emotions/utils/services/social-environment-service.dart';
+
 import 'package:tracking_emotions/widgets/after-submit/congratiulations-page.dart';
 
 import './selector.dart';
@@ -13,42 +16,6 @@ class SubmitEmotionRecordPage extends StatefulWidget {
 }
 
 class _SubmitEmotionRecordPageState extends State<SubmitEmotionRecordPage> {
-  final List<String> emotions = [
-    'sad',
-    'happy',
-    'enthuziastic',
-    'angry',
-    'gealous',
-    'nostalgic',
-    'disgusted',
-    'worried',
-    'grateful',
-    'annoyed',
-    'passionate',
-    'exhausted',
-    'fearless',
-    'shy',
-    'tired',
-  ];
-
-  final List<String> locations = [
-    'home',
-    'university',
-    'Cluj',
-  ];
-
-  final List<String> people = [
-    'Andrei',
-    'Alex',
-    'Florin',
-  ];
-
-  final Map<String, String> peopleMap = {
-    '1': 'Andrei',
-    '2': 'Alex',
-    '3': 'Florin',
-  };
-
   Selector emotionSelector;
   Selector locationsSelector;
   Selector peopleSelector;
@@ -57,21 +24,19 @@ class _SubmitEmotionRecordPageState extends State<SubmitEmotionRecordPage> {
   String selectedLocation;
   String selectedPersonId;
 
-  List<Emotion> emotionList;
+  // List<Emotion> emotionList;
+  // List<SocialEnvironment> locationList;
+  // List<SocialEnvironment> peopleList;
 
   EmotionService _emotionService;
+  SocialEnvironmentService _socialEnvironmentService;
 
   _SubmitEmotionRecordPageState() {
-    // this.emotionSelector =
-    //     new Selector(emotions, 'emotion', getDropDownEmotion);
-    // this.locationsSelector =
-    //     new Selector(locations, 'location', getDropDownLocation);
     this.selectedEmotion = "";
     this.selectedLocation = "";
     this.selectedPersonId = "";
     _emotionService = new EmotionService();
-    this.peopleSelector =
-        new Selector(peopleMap, 'person', getDropDownPersonId);
+    _socialEnvironmentService = new SocialEnvironmentService();
   }
 
   void getDropDownEmotion(String text) {
@@ -86,16 +51,32 @@ class _SubmitEmotionRecordPageState extends State<SubmitEmotionRecordPage> {
     this.selectedPersonId = personId;
   }
 
-  void getItems() async {
+  Future<int> getItems() async {
     var backendEmotions = await _emotionService.getEmotionsForCategory(
         "-1"); //TODO: change this to the emotion category once here
+    var backendLocations =
+        await _socialEnvironmentService.getSocialEnvironmentsByType(true);
+    var backendPeople =
+        await _socialEnvironmentService.getSocialEnvironmentsByType(false);
+
     this.setState(() {
-      this.emotionList = backendEmotions;
+      // this.emotionList = backendEmotions;
       this.emotionSelector = new Selector(
           parseEmotionListToMap(backendEmotions),
           'emotion',
           getDropDownEmotion);
+      this.locationsSelector = new Selector(
+          parseSocialEnvironmentListToMap(backendLocations),
+          'location',
+          getDropDownLocation);
+      this.peopleSelector = new Selector(
+          parseSocialEnvironmentListToMap(backendPeople),
+          'person',
+          getDropDownPersonId);
     });
+    var length =
+        backendEmotions.length + backendLocations.length + backendPeople.length;
+    return length;
   }
 
   @override
@@ -108,7 +89,8 @@ class _SubmitEmotionRecordPageState extends State<SubmitEmotionRecordPage> {
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
-        future: this._emotionService.getEmotionsForCategory("-1"), //change this
+        future: _emotionService.getEmotionsForCategory(
+            "-1"), //TODO: change this category and improve the future
         builder: (context, snapshot) {
           return MaterialApp(
             theme: ThemeData(
@@ -127,14 +109,14 @@ class _SubmitEmotionRecordPageState extends State<SubmitEmotionRecordPage> {
                           'I felt',
                         ),
                         emotionSelector,
-                        // SubmitEmotionRecordPageText(
-                        //   'when I was at',
-                        // ),
-                        // locationsSelector,
-                        // SubmitEmotionRecordPageText(
-                        //   'with',
-                        // ),
-                        // peopleSelector,
+                        SubmitEmotionRecordPageText(
+                          'when I was at',
+                        ),
+                        locationsSelector,
+                        SubmitEmotionRecordPageText(
+                          'with',
+                        ),
+                        peopleSelector,
                         Container(
                           child: ElevatedButton(
                             onPressed: onPressed,
@@ -189,5 +171,20 @@ class _SubmitEmotionRecordPageState extends State<SubmitEmotionRecordPage> {
       emotionMap[emotionList[index].EmotionId] = emotionList[index].Name;
     }
     return emotionMap;
+  }
+
+  Map<String, String> parseSocialEnvironmentListToMap(
+      List<SocialEnvironment> socialEnvironmentList) {
+    for (int i = 0; i < socialEnvironmentList.length; i++) {
+      print(socialEnvironmentList[i].SocialEnvironmentId);
+    }
+    Map<String, String> socialEnvironmentMap = Map<String, String>();
+    for (int index = 0; index < socialEnvironmentList.length; index++) {
+      socialEnvironmentMap[socialEnvironmentList[index].SocialEnvironmentId] =
+          socialEnvironmentList[index].Relation;
+      // print(socialEnvironmentList[index].SocialEnvironmentId);
+      // print(socialEnvironmentList[index].Relation);
+    }
+    return socialEnvironmentMap;
   }
 }
