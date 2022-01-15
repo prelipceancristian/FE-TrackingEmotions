@@ -74,8 +74,40 @@ class HomeScreen extends StatelessWidget {
                                 borderRadius: BorderRadius.circular(30),
                               ),
                             ))),
-                  ),
+                  )
                 ])),
+                Align(
+                  alignment: Alignment.bottomRight,
+                  child: GestureDetector(
+                    onTap: () => {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => UserDetailsPage()))
+                    },
+                    child: Container(
+                      margin: const EdgeInsets.only(bottom: 30.0, right: 20.0),
+                      height: 60.0,
+                      width: 60.0,
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        color: Color.fromRGBO(238, 161, 119, 1.0),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.black26,
+                            offset: Offset(0, 2),
+                            blurRadius: 6.0,
+                          ),
+                        ],
+                        image: DecorationImage(
+                          image: AssetImage(
+                            'assets/icons/user_page.jpg',
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
               ],
             )));
   }
