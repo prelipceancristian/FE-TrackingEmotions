@@ -12,7 +12,7 @@ class CongratulationsPage extends StatelessWidget {
             Container(
               margin: EdgeInsets.only(top: 350),
               child: Text(
-                'Congratulations! \n You have logged your first emotion!',
+                'Congratulations! \n You have logged your emotion!',
                 style: TextStyle(
                     fontSize: 35,
                     fontWeight: FontWeight.bold,
@@ -23,7 +23,7 @@ class CongratulationsPage extends StatelessWidget {
           ],
         ),
       ),
-      backgroundColor: Colors.red[100],
+      backgroundColor: Color.fromARGB(255, 250, 237, 227),
       floatingActionButton: FloatingActionButton(
         backgroundColor: Colors.red[300],
         child: Icon(Icons.arrow_forward_ios),

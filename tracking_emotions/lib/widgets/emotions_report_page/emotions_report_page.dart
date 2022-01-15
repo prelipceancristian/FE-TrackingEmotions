@@ -124,7 +124,7 @@ class _EmotionsReportPageState extends State<EmotionsReportPage> {
       ),
       body: Container(
         decoration: BoxDecoration(
-          color: Colors.white,
+          color: Color.fromARGB(255, 250, 237, 227),
         ),
         padding: const EdgeInsets.all(18.0),
         child: ListView.builder(

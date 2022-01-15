@@ -73,7 +73,7 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.red[100],
+      backgroundColor:  Color.fromARGB(255, 250, 237, 227),
       body: Container(
         child: Stack(
           children: <Widget>[
@@ -113,7 +113,7 @@ class _HomePageState extends State<HomePage> {
                 height: 250,
                 margin: EdgeInsets.only(top: 300),
                 decoration:
-                    BoxDecoration(color: Color.fromRGBO(156, 80, 82, 1)),
+                    BoxDecoration(color:Color.fromARGB(255, 249, 187, 178) ),
                 child: Column(
                   children: <Widget>[
                     Container(
