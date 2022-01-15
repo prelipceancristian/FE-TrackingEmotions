@@ -75,8 +75,11 @@ class HomeScreen extends StatelessWidget {
                                 borderRadius: BorderRadius.circular(30),
                               ),
                             ))),
-                  ),
-                  GestureDetector(
+                  )
+                ])),
+                Align(
+                  alignment: Alignment.bottomRight,
+                  child: GestureDetector(
                     onTap: () => {
                       Navigator.push(
                           context,
@@ -84,7 +87,7 @@ class HomeScreen extends StatelessWidget {
                               builder: (context) => UserDetailsPage()))
                     },
                     child: Container(
-                      margin: const EdgeInsets.only(top: 215.0, left: 300.0),
+                      margin: const EdgeInsets.only(bottom: 30.0, right: 20.0),
                       height: 60.0,
                       width: 60.0,
                       decoration: BoxDecoration(
@@ -105,7 +108,7 @@ class HomeScreen extends StatelessWidget {
                       ),
                     ),
                   ),
-                ])),
+                ),
               ],
             )));
   }
