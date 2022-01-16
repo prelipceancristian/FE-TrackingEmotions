@@ -17,8 +17,6 @@ class EmotionsReportPage extends StatefulWidget {
 class _EmotionsReportPageState extends State<EmotionsReportPage> {
   List<EmotionCard> emotions;
 
-  Future<List<EmotionCard>> futureCards;
-
   // final emotions = [
   //   EmotionCard(
   //       heading: 'Wonderful',
@@ -52,31 +50,18 @@ class _EmotionsReportPageState extends State<EmotionsReportPage> {
     List<EmotionLogDescriptor> emotionLogs =
         await _emotionLogService.getEmotionLogsForUser(userId);
 
-    // for (int index = 0; index < emotionLogs.length; index++) {
-    //   var temp = EmotionCard(
-    //       heading: emotionLogs[index].EmotionName,
-    //       subheading: emotionLogs[index].SocialEnvironment1,
-    //       supportingText: emotionLogs[index].SocialEnvironment2,
-    //       time: emotionLogs[index].Date);
-    //   emotionCardList.add(temp);
-    // }
     if (emotionLogs == null) {
       return [];
     }
-    return emotionLogs
-        .map((e) => EmotionCard(
-            heading: e.EmotionName,
-            subheading: e.SocialEnvironment1,
-            supportingText: e.SocialEnvironment2,
-            time: e.Date))
-        .toList();
-
-    //return emotionCardList;
-  }
-
-  Future<List<EmotionLogDescriptor>> getDescriptors() async {
-    return await _emotionLogService
-        .getEmotionLogsForUser(_authenticationController.getAccountId());
+    for (int index = 0; index < emotionLogs.length; index++) {
+      var temp = EmotionCard(
+          heading: emotionLogs[index].EmotionName,
+          subheading: emotionLogs[index].SocialEnvironment1,
+          supportingText: emotionLogs[index].SocialEnvironment2,
+          time: emotionLogs[index].Date);
+      emotionCardList.add(temp);
+    }
+    return emotionCardList;
   }
 
   _EmotionsReportPageState() {
@@ -92,127 +77,125 @@ class _EmotionsReportPageState extends State<EmotionsReportPage> {
     });
   }
 
-  setupFuture() async {}
-
   @override
   initState() {
-    //getItems();
-    futureCards = getEmotionLogsForUser();
+    getItems();
     super.initState();
-    // getEmotionLogsForUser().then((List<EmotionCard> cards) {
-    //   setState(() {
-    //     this.emotions = cards;
-    //   });
-    // });
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          backgroundColor: Colors.red[300],
-          title: Text(widget.title),
-          actions: [
-            IconButton(
-              icon: Icon(Icons.sort),
-              onPressed: () async {
-                final option = await showDialog<String>(
-                  useSafeArea: true,
-                  context: context,
-                  builder: (context) {
-                    return Dialog(
-                      backgroundColor: Color.fromARGB(255, 249, 187, 178),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10.0),
-                      ),
-                      child: Padding(
-                        padding: const EdgeInsets.all(24.0),
-                        child: Column(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            Text(
-                              'Sort by:',
+      appBar: AppBar(
+        backgroundColor: Colors.red[300],
+        title: Text(widget.title),
+        actions: [
+          IconButton(
+            icon: Icon(Icons.sort),
+            onPressed: () async {
+              final option = await showDialog<String>(
+                useSafeArea: true,
+                context: context,
+                builder: (context) {
+                  return Dialog(
+                    backgroundColor: Color.fromARGB(255, 249, 187, 178),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10.0),
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.all(24.0),
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Text(
+                            'Sort by:',
+                            style: TextStyle(
+                              fontSize: 24.0,
+                            ),
+                          ),
+                          const SizedBox(height: 24.0),
+                          TextButton(
+                            child: Text(
+                              'Emotion',
                               style: TextStyle(
-                                fontSize: 24.0,
+                                fontSize: 16.0,
+                                color: Colors.black,
                               ),
                             ),
-                            const SizedBox(height: 24.0),
-                            TextButton(
-                              child: Text(
-                                'Emotion',
-                                style: TextStyle(
-                                  fontSize: 16.0,
-                                  color: Colors.black,
-                                ),
+                            onPressed: () =>
+                                Navigator.of(context).pop('emotion'),
+                          ),
+                          TextButton(
+                            child: Text(
+                              'Location',
+                              style: TextStyle(
+                                fontSize: 16.0,
+                                color: Colors.black,
                               ),
-                              onPressed: () =>
-                                  Navigator.of(context).pop('emotion'),
                             ),
-                            TextButton(
-                              child: Text(
-                                'Location',
-                                style: TextStyle(
-                                  fontSize: 16.0,
-                                  color: Colors.black,
-                                ),
+                            onPressed: () =>
+                                Navigator.of(context).pop('location'),
+                          ),
+                          TextButton(
+                            child: Text(
+                              'Date',
+                              style: TextStyle(
+                                fontSize: 16.0,
+                                color: Colors.black,
                               ),
-                              onPressed: () =>
-                                  Navigator.of(context).pop('location'),
                             ),
-                            TextButton(
-                              child: Text(
-                                'Date',
-                                style: TextStyle(
-                                  fontSize: 16.0,
-                                  color: Colors.black,
-                                ),
-                              ),
-                              onPressed: () =>
-                                  Navigator.of(context).pop('date'),
-                            ),
-                          ],
-                        ),
+                            onPressed: () => Navigator.of(context).pop('date'),
+                          ),
+                        ],
                       ),
-                    );
-                  },
-                );
+                    ),
+                  );
+                },
+              );
 
-                if (option == 'emotion') {
-                  emotions.sort((a, b) => a.heading
-                      .toLowerCase()
-                      .compareTo(b.heading.toLowerCase()));
-                } else if (option == 'location') {
-                  emotions.sort((a, b) => a.supportingText
-                      .toLowerCase()
-                      .compareTo(b.supportingText.toLowerCase()));
-                } else if (option == 'date') {
-                  emotions.sort((a, b) => DateTime.tryParse(b.time)
-                      .compareTo(DateTime.tryParse(a.time)));
-                }
-                if (option != null) {
-                  setState(() {});
-                }
-              },
-            ),
-          ],
-        ),
-        body: FutureBuilder(
-            future: futureCards,
-            builder: (context, snapshot) =>
-                snapshot.connectionState != ConnectionState.done
-                    ? Center(
-                        child: CircularProgressIndicator(),
-                      )
-                    : Container(
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                        ),
-                        padding: const EdgeInsets.all(18.0),
-                        child: ListView.builder(
-                          itemCount: snapshot.data.length,
-                          itemBuilder: (BuildContext context, int index) =>
-                              snapshot.data[index],
-                        ),
-                      )));
+              if (option == 'emotion') {
+                this.emotions.sort((a, b) =>
+                    a.heading.toLowerCase().compareTo(b.heading.toLowerCase()));
+              } else if (option == 'location') {
+                this.emotions.sort((a, b) => a.supportingText
+                    .toLowerCase()
+                    .compareTo(b.supportingText.toLowerCase()));
+              } else if (option == 'date') {
+                this.emotions.sort((a, b) => DateTime.tryParse(b.time)
+                    .compareTo(DateTime.tryParse(a.time)));
+              }
+              if (option != null) {
+                setState(() {});
+              }
+            },
+          ),
+        ],
+      ),
+      body: FutureBuilder(
+          future: _emotionLogService
+              .getEmotionLogsForUser(_authenticationController.getAccountId()),
+          builder: (context, AsyncSnapshot snapshot) {
+            return snapshot.connectionState != ConnectionState.done
+                ? Center(
+                    child: CircularProgressIndicator(),
+                  )
+                : Container(
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                    ),
+                    padding: const EdgeInsets.all(18.0),
+                    child: emotions.length == 0
+                        ? Center(
+                            child: Text('No emotions added yet!',
+                                style: TextStyle(fontSize: 20)),
+                          )
+                        : ListView.builder(
+                            itemCount: emotions.length,
+                            itemBuilder: (BuildContext context, int index) =>
+                                emotions[index],
+                          ),
+                  );
+          }),
+    );
   }
 }

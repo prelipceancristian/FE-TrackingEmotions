@@ -12,7 +12,7 @@ class MyStatefulWidget extends StatefulWidget {
 }
 
 class _MyStatefulWidgetState extends State<MyStatefulWidget> {
-  int selectedPage = 0;
+  int selectedPage = 1;
 
   final _pageOptions = [EmotionsReportPage(), HomeScreen(), EmotionInfoPage()];
 

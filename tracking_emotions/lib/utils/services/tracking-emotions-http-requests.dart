@@ -1,7 +1,8 @@
 import 'package:http/http.dart' as http;
 
 class TrackingEmotionsHttpRequests {
-  String url = 'http://10.0.2.2:8080/api';
+  //String url = 'http://10.0.2.2:8080/api';
+  String url = 'https://trackingemotions.herokuapp.com/api';
 
   TrackingEmotionsHttpRequests(url) {
     this.url += url;

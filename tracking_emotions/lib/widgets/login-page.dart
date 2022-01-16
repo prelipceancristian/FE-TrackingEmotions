@@ -131,7 +131,7 @@ class _LoginScreenState extends State<LoginScreen> {
   Widget buildSignupBtn() {
     return GestureDetector(
       onTap: () => {
-        Navigator.pushReplacement(
+        Navigator.push(
           context,
           MaterialPageRoute(builder: (context) => RegisterPage()),
         )
