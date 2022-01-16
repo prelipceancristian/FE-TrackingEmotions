@@ -60,7 +60,9 @@ class _EmotionsReportPageState extends State<EmotionsReportPage> {
     //       time: emotionLogs[index].Date);
     //   emotionCardList.add(temp);
     // }
-
+    if (emotionLogs == null) {
+      return [];
+    }
     return emotionLogs
         .map((e) => EmotionCard(
             heading: e.EmotionName,
