@@ -73,7 +73,7 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor:  Color.fromARGB(255, 250, 237, 227),
+      backgroundColor: Color.fromARGB(255, 250, 237, 227),
       body: Container(
         child: Stack(
           children: <Widget>[
@@ -113,7 +113,7 @@ class _HomePageState extends State<HomePage> {
                 height: 250,
                 margin: EdgeInsets.only(top: 300),
                 decoration:
-                    BoxDecoration(color:Color.fromARGB(255, 249, 187, 178) ),
+                    BoxDecoration(color: Color.fromARGB(255, 249, 187, 178)),
                 child: Column(
                   children: <Widget>[
                     Container(
@@ -160,7 +160,7 @@ class _HomePageState extends State<HomePage> {
                                           selectedValue)));
                         },
                         child: Text(
-                          "Mai departe",
+                          "Next",
                           style: TextStyle(color: Colors.black, fontSize: 20),
                         ),
                         style: ButtonStyle(

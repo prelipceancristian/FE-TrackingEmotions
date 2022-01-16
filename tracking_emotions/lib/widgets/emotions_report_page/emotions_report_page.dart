@@ -50,10 +50,9 @@ class _EmotionsReportPageState extends State<EmotionsReportPage> {
     List<EmotionLogDescriptor> emotionLogs =
         await _emotionLogService.getEmotionLogsForUser(userId);
 
-    for (int i = 0; i < emotionLogs.length; i++) {
-      print(emotionLogs.elementAt(i).toString());
+    if (emotionLogs == null) {
+      return [];
     }
-
     for (int index = 0; index < emotionLogs.length; index++) {
       var temp = EmotionCard(
           heading: emotionLogs[index].EmotionName,
@@ -155,14 +154,14 @@ class _EmotionsReportPageState extends State<EmotionsReportPage> {
               );
 
               if (option == 'emotion') {
-                emotions.sort((a, b) =>
+                this.emotions.sort((a, b) =>
                     a.heading.toLowerCase().compareTo(b.heading.toLowerCase()));
               } else if (option == 'location') {
-                emotions.sort((a, b) => a.supportingText
+                this.emotions.sort((a, b) => a.supportingText
                     .toLowerCase()
                     .compareTo(b.supportingText.toLowerCase()));
               } else if (option == 'date') {
-                emotions.sort((a, b) => DateTime.tryParse(b.time)
+                this.emotions.sort((a, b) => DateTime.tryParse(b.time)
                     .compareTo(DateTime.tryParse(a.time)));
               }
               if (option != null) {
@@ -185,11 +184,16 @@ class _EmotionsReportPageState extends State<EmotionsReportPage> {
                       color: Colors.white,
                     ),
                     padding: const EdgeInsets.all(18.0),
-                    child: ListView.builder(
-                      itemCount: emotions.length,
-                      itemBuilder: (BuildContext context, int index) =>
-                          emotions[index],
-                    ),
+                    child: emotions.length == 0
+                        ? Center(
+                            child: Text('No emotions added yet!',
+                                style: TextStyle(fontSize: 20)),
+                          )
+                        : ListView.builder(
+                            itemCount: emotions.length,
+                            itemBuilder: (BuildContext context, int index) =>
+                                emotions[index],
+                          ),
                   );
           }),
     );

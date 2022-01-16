@@ -40,7 +40,7 @@ class HomeScreen extends StatelessWidget {
                   ),
                   Container(
                     margin: EdgeInsets.only(
-                        top: 30, right: 25, left: 25, bottom: 25),
+                        top: 10, right: 25, left: 25, bottom: 25),
                     child: TextButton(
                         child: Text(
                           "Let's start",

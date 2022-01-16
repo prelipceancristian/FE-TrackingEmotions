@@ -38,6 +38,8 @@ class _SubmitEmotionRecordPageState extends State<SubmitEmotionRecordPage> {
   String selectedLocation;
   String selectedPersonId;
 
+  Future<List<dynamic>> futureSelectors;
+
   // List<Emotion> emotionList;
   // List<SocialEnvironment> locationList;
   // List<SocialEnvironment> peopleList;
@@ -91,24 +93,29 @@ class _SubmitEmotionRecordPageState extends State<SubmitEmotionRecordPage> {
     var backendPeople =
         await _socialEnvironmentService.getSocialEnvironmentsByType(false);
 
-    this.setState(() {
-      // this.emotionList = backendEmotions;
-      this.emotionSelector = new Selector(
-          parseEmotionListToMap(backendEmotions),
-          'emotion',
-          getDropDownEmotion);
-      this.locationsSelector = new Selector(
-          parseSocialEnvironmentListToMap(backendLocations),
-          'location',
-          getDropDownLocation);
-      this.peopleSelector = new Selector(
-          parseSocialEnvironmentListToMap(backendPeople),
-          'person',
-          getDropDownPersonId);
-    });
-    var length =
+    //this.setState(() {
+    // this.emotionList = backendEmotions;
+    this.emotionSelector = new Selector(
+        parseEmotionListToMap(backendEmotions), 'emotion', getDropDownEmotion);
+    this.locationsSelector = new Selector(
+        parseSocialEnvironmentListToMap(backendLocations),
+        'location',
+        getDropDownLocation);
+    this.peopleSelector = new Selector(
+        parseSocialEnvironmentListToMap(backendPeople),
+        'person',
+        getDropDownPersonId);
+    //}
+    //);
+    int length =
         backendEmotions.length + backendLocations.length + backendPeople.length;
     return length;
+  }
+
+  getBackendEmotions() async {
+    var backendEmotions =
+        await _emotionService.getEmotionsForCategory(_categoryId);
+    return backendEmotions;
   }
 
   @override
@@ -116,13 +123,26 @@ class _SubmitEmotionRecordPageState extends State<SubmitEmotionRecordPage> {
     // TODO: implement initState
     getItems();
     super.initState();
+    // this.futureSelectors = getItems();
+    // this.emotionSelector = new Selector(
+    //     parseEmotionListToMap(futureSelectors[0]),
+    //     'emotion',
+    //     getDropDownEmotion);
+    // this.locationsSelector = new Selector(
+    //     parseSocialEnvironmentListToMap(backendLocations),
+    //     'location',
+    //     getDropDownLocation);
+    // this.peopleSelector = new Selector(
+    //     parseSocialEnvironmentListToMap(backendPeople),
+    //     'person',
+    //     getDropDownPersonId);
   }
 
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
-        future: _emotionService.getEmotionsForCategory(
-            _categoryId), //TODO: change this category and improve the future
+        future:
+            this.getItems(), //TODO: change this category and improve the future
         builder: (context, snapshot) {
           return MaterialApp(
             theme: ThemeData(

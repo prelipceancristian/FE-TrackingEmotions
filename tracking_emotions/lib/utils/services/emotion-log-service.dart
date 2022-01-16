@@ -47,6 +47,11 @@ class EmotionLogService {
         for (int i = 0; i < emotionLogIterable.length; i++) {
           print(emotionLogIterable.elementAt(i).toString());
         }
+        var asd = List<EmotionLogDescriptor>.from(
+            emotionLogIterable.map((e) => EmotionLogDescriptor.fromJson(e)));
+        for (int i = 0; i < asd.length; i++) {
+          print(asd.elementAt(i).toString());
+        }
         return List<EmotionLogDescriptor>.from(
             emotionLogIterable.map((e) => EmotionLogDescriptor.fromJson(e)));
       } else {
