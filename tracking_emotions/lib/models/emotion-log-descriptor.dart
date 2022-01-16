@@ -17,11 +17,11 @@ class EmotionLogDescriptor {
 
   factory EmotionLogDescriptor.fromJson(Map<String, dynamic> json) {
     return EmotionLogDescriptor(
-        EmotionLogID: json['EmotionLogID'],
-        Date: json['Date'],
-        EmotionName: json['EmotionName'],
-        EmotionDescription: json['EmotionDescription'],
-        SocialEnvironment1: json['SocialEnvironment1'],
-        SocialEnvironment2: json['SocialEnvironment2']);
+        EmotionLogID: json['emotionLogID'],
+        Date: json['date'],
+        EmotionName: json['emotionName'],
+        EmotionDescription: json['emotionDescription'],
+        SocialEnvironment1: json['socialEnvironment1'],
+        SocialEnvironment2: json['socialEnvironment2']);
   }
 }

@@ -2,16 +2,23 @@
 
 import 'package:flutter/material.dart';
 
-class EmotionCard extends StatelessWidget {
-  const EmotionCard(
-      {Key key, this.heading, this.subheading, this.supportingText, this.time})
-      : super(key: key);
+class EmotionCard extends StatefulWidget {
+  // const EmotionCard(
+  //     {Key key, this.heading, this.subheading, this.supportingText, this.time})
+  //     : super(key: key);
 
-  final String heading;
-  final String subheading;
-  final String supportingText;
-  final String time;
+  EmotionCard({this.heading, this.subheading, this.supportingText, this.time});
 
+  String heading;
+  String subheading;
+  String supportingText;
+  String time;
+
+  @override
+  State<EmotionCard> createState() => _EmotionCardState();
+}
+
+class _EmotionCardState extends State<EmotionCard> {
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -32,7 +39,7 @@ class EmotionCard extends StatelessWidget {
           children: [
             ListTile(
               title: Text(
-                heading ?? 'default heading',
+                widget.heading ?? 'default heading',
                 style: const TextStyle(
                     fontSize: 28,
                     color: Colors.black,
@@ -41,7 +48,7 @@ class EmotionCard extends StatelessWidget {
               leading: CircleAvatar(
                 backgroundColor: Colors.red[200],
                 child: Text(
-                  heading[0],
+                  widget.heading[0],
                   style: const TextStyle(fontSize: 22, color: Colors.white),
                 ),
                 radius: 20,
@@ -51,21 +58,21 @@ class EmotionCard extends StatelessWidget {
               padding: const EdgeInsets.only(right: 20.0),
               alignment: Alignment.bottomRight,
               child: Text(
-                time ?? 'default time',
+                widget.time ?? 'default time',
                 style: const TextStyle(fontSize: 20),
               ),
             ),
             Container(
               padding: const EdgeInsets.all(10.0),
               alignment: Alignment.center,
-              child: Text(supportingText ?? 'default subheading',
+              child: Text(widget.supportingText ?? 'default subheading',
                   style: const TextStyle(fontSize: 25)),
             ),
             Container(
               padding: const EdgeInsets.all(13.0),
               alignment: Alignment.center,
               child: Text(
-                subheading ?? 'default subheading',
+                widget.subheading ?? 'default subheading',
                 style: const TextStyle(fontSize: 25),
               ),
             ),
